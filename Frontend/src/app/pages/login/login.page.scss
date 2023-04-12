@@ -1,0 +1,45 @@
+ion-card{
+  top: 15%;
+  border-radius: 10px;
+}
+
+ion-card-title{
+  font-size: 26px;
+  letter-spacing: 1px;
+  font-family: 'Poppins Medium';
+}
+
+
+form{
+  margin: 20px auto 0 auto;
+  font-family: 'Poppins Medium';
+  padding-bottom: 20px;
+}
+
+input{
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #403D3D;
+  background: none;
+  font-size: 14px;
+  width: 90%;
+}
+
+
+.input-margin{
+  margin-bottom: 15px;
+}
+
+ion-button{
+  font-family: 'Poppins Medium';
+}
+
+
+.div-btn{
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+

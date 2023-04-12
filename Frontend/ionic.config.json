@@ -1,0 +1,7 @@
+{
+  "name": "Roteiros Vianenses",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
