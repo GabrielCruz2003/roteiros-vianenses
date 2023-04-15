@@ -1,0 +1,51 @@
+
+
+
+.lista-header{
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.logo{
+  width: 50px;
+  height: 50px;
+}
+
+
+.img-defenicoes
+{
+  width: 30px;
+  height: 30px;
+}
+
+.lista-header li{
+  font-family: 'Poppins Medium';
+}
+
+.div-user{
+  margin-top: 20px;
+}
+
+
+.user-foto{
+  width: 175px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.md-foto{
+  color:#00AFDD;
+  background: none;
+  font-family: 'Poppins Regular';
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+
+ion-item ion-label{
+  font-family: 'Poppins Regular';
+  font-size: 14px;
+}

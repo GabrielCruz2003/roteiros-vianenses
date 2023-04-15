@@ -24,3 +24,35 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+@font-face {
+  font-family: 'Popins Black' ;
+  src: url("./assets/Fonts/Poppins/Poppins-Black.ttf");
+}
+
+@font-face {
+  font-family: 'Poppins Medium';
+  src: url("./assets/Fonts/Poppins/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: 'Poppins SemiBold';
+  src: url("./assets/Fonts/Poppins/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: 'Poppins Bold';
+  src: url("./assets/Fonts/Poppins/Poppins-Bold.ttf");
+}
+
+
+@font-face {
+  font-family: 'Poppins Regular';
+  src: url("./assets/Fonts/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Poppins Light';
+  src: url("./assets/Fonts/Poppins/Poppins-Light.ttf");
+}

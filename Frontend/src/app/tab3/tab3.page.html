@@ -1,17 +1,48 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ul class="lista-header">
+      <li><img class="logo" src="../../assets/images/logotipo.png" alt="logo"></li>
+      <li>Editar Perfil</li>
+      <li><img class="img-defenicoes" src="../../assets/images/definicoes.png" alt="definições"></li>
+    </ul>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <section>
+
+      <div class="div-user ion-text-center">
+          <img src="../../assets/images/user_perfil.png" alt="user" class="user-foto"><br>
+          <button class="md-foto">Mudar Foto</button>
+      </div>
+  </section>
+
+
+  <section>
+    <div class="div-input ion-text-center">
+      <ion-item>
+        <ion-label position="floating">Primero Nome</ion-label>
+        <ion-input type="text" value="Guilherme"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Último Nome</ion-label>
+        <ion-input type="text" value="Magalhaes"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" value="gui@gmail.com"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="Password" value="naosei" ></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="div-button ion-text-center">
+      <ion-button class="md-button" style="margin-top: 20px; font-family: 'Poppins Medium' ;">Guardar</ion-button>
+    </div>
+  </section>
+
+
 </ion-content>
