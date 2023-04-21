@@ -1,12 +1,10 @@
 import express from 'express';
-import userRoutes from './users';
 
-const app = express();
-const PORT = 5500;
+const router = express.Router();
 
-app.use(express.json());
-app.use('/api/users', userRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+router.use('/', (req, res) => {
+    res.send('Hello World!');
 });
+
+
+export default router;
