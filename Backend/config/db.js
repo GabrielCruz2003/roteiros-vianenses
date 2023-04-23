@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 
 
-const db = new Sequelize('roteirosvianenses', 'root', 'root', {
+const db = new Sequelize('roteiros-vianenses', 'root', 'root', {
   host: 'localhost',
   dialect: 'mysql'
 });

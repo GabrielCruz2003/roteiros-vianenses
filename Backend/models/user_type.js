@@ -1,8 +1,7 @@
 import { Sequelize } from "sequelize";
-import db from "../config/db";
-import UserModel from "./users.js";
+import db from "../config/db.js";
 
-const UserTypeModel = db.define('user_type', {
+const UserTypeModel = db.define('user_types', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -14,8 +13,4 @@ const UserTypeModel = db.define('user_type', {
     }
 });
 
-UserTypeModel.hasMany(UserModel, { foreignKey: 'user_type_id' });
-
 export default UserTypeModel;
-
-

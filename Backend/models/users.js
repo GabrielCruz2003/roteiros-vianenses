@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
-import db from "../config/db";
-
+import db from "../config/db.js";
+import UserTypeModel from "./user_type.js";
 
 const UserModel = db.define('users', {
     id: {
@@ -23,7 +23,17 @@ const UserModel = db.define('users', {
     image: {
         type: Sequelize.STRING,
         defaultValue: 'default.png'
+    },
+    user_type_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'user_types',
+            key: 'id'
+        }
     }
 });
+
+UserModel.belongsTo(UserTypeModel, { foreignKey: 'user_type_id' });
 
 export default UserModel;
