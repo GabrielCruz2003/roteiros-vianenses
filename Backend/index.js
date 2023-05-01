@@ -18,8 +18,9 @@ app.use(cors(corsOptions));
 app.use(morgan("short"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("combined"));
 app.use("/uploads", express.static("./uploads"));
-app.use("/api", router);
+app.use(router);
 
 
 
@@ -34,4 +35,9 @@ app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
     process.env.SERVER_HOST,
     process.env.SERVER_PORT
   );
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Erro interno no servidor");
 });
