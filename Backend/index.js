@@ -4,6 +4,7 @@ import morgan from "morgan";
 import { config } from "dotenv";
 import db from "./config/db.js";
 import router from "./routes/index.js";
+import roteiroModel from "./models/roteiro.js";
 
 config();
 
