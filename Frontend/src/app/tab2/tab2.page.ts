@@ -9,4 +9,12 @@ export class Tab2Page {
 
   constructor() {}
 
+  
+  //verifica se o usuário está logado
+  ionViewWillEnter(){
+    if(localStorage.getItem('token') == null){
+      window.location.href = '/login';
+    }
+  }
+
 }
