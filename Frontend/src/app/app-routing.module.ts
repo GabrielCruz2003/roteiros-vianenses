@@ -1,10 +1,8 @@
-
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
-
 
 
 
