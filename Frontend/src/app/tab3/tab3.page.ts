@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +11,12 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  ionViewWillEnter() {
+    if (localStorage.getItem('token') == null) {
+      window.location.href = '/login';
+    }
+  }
 
 }

@@ -1,17 +1,86 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ul class="lista-header">
+      <li><img class="logo" src="../../assets/images/logotipo.png" alt="logo"></li>
+      <li>Roteiros</li>
+      <li><img class="img-defenicoes" src="../../assets/images/definicoes.png" alt="definições"></li>
+    </ul>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="sistema-filtrar">
+    <div class="filtrar-esquerda">
+      <h3>Filtrar Por</h3>
+    </div>
+
+    <div class="filtrar-direita">
+      <ion-list>
+        <ion-item>
+          <ion-select aria-label="Fruit" interface="alert" placeholder="Tipo de Roteiro">
+            <ion-select-option>Roteiros Culturais</ion-select-option>
+            <ion-select-option>Roteiros Gastronômicos</ion-select-option>
+            <ion-select-option>Roteiros Monumentais</ion-select-option>
+            <ion-select-option>Todos</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <div class="conteudo-cards">
+    <ion-card>
+      <img alt="Silhouette of mountains" src="../../assets/images/fotos de viana/praia-do-cabedelo-pt-1.jpg" style="height: 240px; width: 340px;" />
+      <ion-card-header>
+        <ion-card-title>Praia do Cabedelo</ion-card-title>
+        <ion-card-subtitle>Roteiro Cultural</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+      <ion-button fill="clear" color="dark">Ver Mais</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <img alt="Silhouette of mountains" src="../../assets/images/fotos de viana/luzia.jpg" style="height: 240px; width: 340px;" />
+      <ion-card-header>
+        <ion-card-title>Santa Luzia</ion-card-title>
+        <ion-card-subtitle>Roteiro Religioso</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+      <ion-button fill="clear" color="dark">Ver Mais</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <img alt="Silhouette of mountains" src="../../assets/images/fotos de viana/Viana_do_castelo_gil_eanes_(3).jpg" style="height: 240px; width: 340px;" />
+      <ion-card-header>
+        <ion-card-title>Fundação Gil Eanes</ion-card-title>
+        <ion-card-subtitle>Roteiro Monumental</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+      <ion-button fill="clear" color="dark">Ver Mais</ion-button>
+    </ion-card>
+
+    <ion-card>
+      <img alt="Silhouette of mountains" src="../../assets/images/fotos de viana/Praca-da-Republica-Viana-do-Castelo.jpg" style="height: 240px; width: 340px;" />
+      <ion-card-header>
+        <ion-card-title>Chafariz da Praça</ion-card-title>
+        <ion-card-subtitle>Roteiro Monumental</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+      <ion-button fill="clear" color="dark">Ver Mais</ion-button>
+    </ion-card>
+  </div>
+
 </ion-content>
