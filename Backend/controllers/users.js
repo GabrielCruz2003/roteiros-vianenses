@@ -29,15 +29,23 @@ export const createTypeUser = async (req, res) => {
 
 
 export const createUser = async (req, res) => {
-  const { name, email, password, user_type_id } = req.body;
+  const { name, email, password } = req.body;
+
+  const user_type_id = 2;
 
   // Verifica se todos os campos estão preenchidos
-  if (!name || !email || !password || !user_type_id) {
-    return res.status(400).json({ message: "Falta preencher algo" });
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: "Preencha todos os campos obrigatórios" });
+  }
+
+
+  // Verifica se o usuário já está registrado
+  const existingUser = await UserModel.findOne({ where: { email } });
+  if (existingUser) {
+    return res.status(400).json({ message: "O email já está registrado" });
   }
 
   try {
-
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -47,12 +55,14 @@ export const createUser = async (req, res) => {
       password: hashedPassword,
       user_type_id,
     });
+
     return res.status(201).json(user);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Erro ao criar usuário" });
   }
 };
+
 
 
 export const login = async (req, res) => {

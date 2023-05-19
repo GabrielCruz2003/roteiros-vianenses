@@ -11,9 +11,14 @@
         <input class="input-margin" name="email" type="text" [(ngModel)]="email"><br>
         <ion-label class="ion-margin-bottom" for="password">Password</ion-label><br>
         <input name="password" type="password" [(ngModel)]="password">
+        <!-- link para redericionar para a pagina de login-->
+        <div class="div-link">
+          <a href="/register" style="font-size: 12px; text-decoration: none">Não tem conta? Registe-se</a>
+        </div>
         <div class="div-btn">
           <ion-button type="submit" mode="ios">Iniciar Sessão</ion-button>
         </div>
+
       </form>
     </ion-card-content>
   </ion-card>

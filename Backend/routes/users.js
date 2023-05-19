@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 
 const userRoutes = Router();
 
-userRoutes.post("/create", upload.single('image'), createUser);
+userRoutes.post("/create", createUser);
 
 userRoutes.post("/createTypeUser", createTypeUser);
 

@@ -1,0 +1,31 @@
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Nome do Roteiro</ion-label>
+        <ion-input [(ngModel)]="nomeRoteiro" name="nomeRoteiro" placeholder="Digite o nome do roteiro"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descrição do Roteiro</ion-label>
+        <ion-input [(ngModel)]="descricaoRoteiro" name="descricaoRoteiro" placeholder="Digite a descrição do roteiro"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Tipo de Roteiro</ion-label>
+        <ion-select [(ngModel)]="tipoRoteiro" name="tipoRoteiro" placeholder="Selecione o tipo de roteiro">
+          <ion-select-option value="1">Tipo 1</ion-select-option>
+          <ion-select-option value="2">Tipo 2</ion-select-option>
+          <ion-select-option value="3">Tipo 3</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+     <!-- <ion-item>
+        <ion-label position="stacked">Selecionar Imagens</ion-label>
+        <input type="file" multiple name="imagem" />
+      </ion-item>-->
+
+      <ion-button expand="full" (click)="criarRoteiro()">Criar Roteiro</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

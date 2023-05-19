@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-login',
@@ -11,20 +14,25 @@ export class LoginPage implements OnInit {
 
   email: string = '';
   password: string = '';
+  isToastOpen = false;
 
-  constructor(private authService: AuthService, private navCtrl: NavController) { }
+  constructor(private authService: AuthService, private navCtrl: NavController, private toastController: ToastController ) { }
 
 
   ngOnInit() {
   }
 
 
-  doLogin() {
+
+
+  doLogin(){
     this.authService.login(this.email, this.password).subscribe(
       response => {
         console.log(response); // Exibe a resposta do servidor no console
         // redericionar para a pagina de home
         this.navCtrl.navigateRoot('/tabs/tab2');
+        this.exibirToastSucesso("Login efetuado com sucesso!");
+
       },
       error => {
         console.log(error); // Exibe o erro no console
@@ -34,6 +42,15 @@ export class LoginPage implements OnInit {
   }
 
 
-
+  async exibirToastSucesso(mensagem: string) {
+    const toast = await this.toastController.create({
+      message: "Login efetuado com sucesso!",
+      duration: 2000, // duração em milissegundos
+      position: 'bottom', // posição do toast
+      color: 'success' // cor do toast (opcional)
+    });
+    toast.present();
 }
 
+
+}
