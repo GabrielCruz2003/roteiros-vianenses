@@ -37,6 +37,7 @@ export class LoginPage implements OnInit {
       error => {
         console.log(error); // Exibe o erro no console
         // Coloque aqui o código que deve ser executado em caso de erro.
+        this.exibirToastErro("Erro ao efetuar login!");
       }
     );
   }
@@ -50,7 +51,17 @@ export class LoginPage implements OnInit {
       color: 'success' // cor do toast (opcional)
     });
     toast.present();
-}
+  }
+
+  async exibirToastErro(mensagem: string) {
+    const toast = await this.toastController.create({
+      message: "Erro ao efetuar login!",
+      duration: 2000, // duração em milissegundos
+      position: 'bottom', // posição do toast
+      color: 'danger' // cor do toast (opcional)
+    });
+    toast.present();
+  }
 
 
 }
