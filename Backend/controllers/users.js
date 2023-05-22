@@ -27,7 +27,6 @@ export const createTypeUser = async (req, res) => {
   }
 };
 
-
 export const createUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -38,11 +37,17 @@ export const createUser = async (req, res) => {
     return res.status(400).json({ message: "Preencha todos os campos obrigatórios" });
   }
 
+  // Verifica se o email é válido
+  if (!email.includes("@") || !email.includes(".")) {
+    return res.status(400).json({ message: "Email inválido" });
+  }
+
 
   // Verifica se o usuário já está registrado
   const existingUser = await UserModel.findOne({ where: { email } });
   if (existingUser) {
     return res.status(400).json({ message: "O email já está registrado" });
+
   }
 
   try {
@@ -62,8 +67,6 @@ export const createUser = async (req, res) => {
     return res.status(500).json({ message: "Erro ao criar usuário" });
   }
 };
-
-
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
