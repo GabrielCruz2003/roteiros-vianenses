@@ -64,25 +64,36 @@ export const getRoteiro = async (req, res) => {
   }
 };
 
+export const getTypeRoteiro = async (req, res) => {
+    try {
+        const roteiros = await roteiroTypeModel.findAll({ 
+        });
+
+        return res.status(200).json(roteiros);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Erro ao buscar roteiro" });
+    }
+};
 
 export const addImagem = async (req, res) => {
 
     const { roteiro_id } = req.body;
-    const { nome } = req.body;
+ 
 
     // Verifica se todos os campos estão preenchidos
-    if (!nome || !roteiro_id) {
+    if (!roteiro_id) {
         return res.status(400).json({ message: "Falta preencher algo" });
     }
 
     const { filename } = req.file;
     const time = new Date().getTime();
-    const imagem = `${time}_${filename}`;
+    const nome = `${time}_${filename}`;
+    
 
     try {
         const roteiro = await imagensModel.create({
             nome,
-            imagem,
             roteiro_id,
         });
         return res.status(201).json(roteiro);

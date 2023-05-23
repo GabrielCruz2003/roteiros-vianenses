@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { getImageUrl } from './roteiro-utils';
 
-interface RoteiroType {
-  id: number;
-  type: string;
-}
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-roteiro-components',
+  templateUrl: './roteiro-components.component.html',
+  styleUrls: ['./roteiro-components.component.scss'],
 })
-export class Tab1Page implements OnInit {
+export class RoteiroComponentsComponent implements OnInit {
   roteiros: any = [];
-  roteiroTypes: RoteiroType[] = [];
+  roteiroTypes: any = [];
 
   constructor(private http: HttpClient) {}
 
@@ -37,7 +34,7 @@ export class Tab1Page implements OnInit {
 
   getRoteiroTypes(): void {
     this.http
-      .get<RoteiroType[]>('http://localhost:5500/roteiro/getRoteiroType')
+      .get<any>('http://localhost:5500/roteiro/getRoteiroType')
       .subscribe(
         (response) => {
           this.roteiroTypes = response;
@@ -48,8 +45,13 @@ export class Tab1Page implements OnInit {
       );
   }
 
-  getRoteiroTypeName(id: number): string {
-    const roteiroType = this.roteiroTypes.find((type: RoteiroType) => type.id === id);
+  getImageUrl(nome: string): string {
+    return `http://localhost:5500/uploads/${nome}`;
+  }
+
+  getRoteiroTypeName(roteiroTypeId: number): string {
+    const roteiroType = this.roteiroTypes.find((type: any) => type.id === roteiroTypeId);
     return roteiroType ? roteiroType.type : '';
   }
+
 }

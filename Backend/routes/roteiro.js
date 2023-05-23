@@ -5,6 +5,7 @@ import { createTypeRoteiro } from "../controllers/roteiro.js";
 import { getRoteiro } from "../controllers/roteiro.js";
 import { addImagem } from "../controllers/roteiro.js";
 import { storage } from "../config/multerconfig.js";
+import { getTypeRoteiro } from "../controllers/roteiro.js";
 
 
 
@@ -19,6 +20,8 @@ roteiroRoutes.post("/createTypeRoteiro", createTypeRoteiro);
 roteiroRoutes.get("/getRoteiro", getRoteiro);
 
 roteiroRoutes.post("/addImagem", upload.single("imagem"), addImagem);
+
+roteiroRoutes.get("/getRoteiroType", getTypeRoteiro)
 
 
 export default roteiroRoutes;

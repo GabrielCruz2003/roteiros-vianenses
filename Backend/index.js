@@ -9,10 +9,9 @@ import imagensModel from "./models/imagens.js";
 import multer from "multer";
 import { addImagem } from "./controllers/roteiro.js";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+import { dirname, join } from "path";
 import path from "path";
 import { storage } from "./config/multerconfig.js";
-
 
 config();
 
@@ -23,16 +22,18 @@ const corsOptions = {
   origin: clientURL,
 };
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-
-app.use(cors(corsOptions));
-app.use(morgan("short"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Middleware para exibir logs das solicitações
 app.use(morgan("combined"));
 
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-
+// Configuração do diretório de uploads
+app.use('/uploads', express.static(join(__dirname, './uploads')));
 
 app.use(router);
 
