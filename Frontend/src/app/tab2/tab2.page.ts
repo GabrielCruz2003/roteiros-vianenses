@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { RoteiroService } from '../services/roteiro-service';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-tab2',
@@ -10,9 +12,17 @@ import { tap } from 'rxjs/operators';
 })
 export class Tab2Page {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(RoteiroService) private roteiroService: RoteiroService
+    ) {}
 
   weatherData: any = {};
+  ultimosRoteiros: any = [];
+
+  ngOnInit() {
+    this.carregarUltimosRoteiros();
+  }
 
   getWeatherData(): Observable<any> {
     const globalIdLocal = '1010500'; // Viana do Castelo
@@ -38,6 +48,17 @@ export class Tab2Page {
       );
     }
   }
+
+  carregarUltimosRoteiros() {
+    this.roteiroService.getUltimosRoteiros(4)
+      .subscribe((roteiros) => {
+        this.ultimosRoteiros = roteiros;
+      });
+  }
+
+  
+
 }
+
 
 

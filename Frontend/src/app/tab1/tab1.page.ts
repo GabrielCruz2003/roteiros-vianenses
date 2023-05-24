@@ -22,6 +22,12 @@ export class Tab1Page implements OnInit {
     this.getRoteiroTypes();
   }
 
+  ionViewWillEnter() {
+    if (localStorage.getItem('token') == null) {
+      window.location.href = '/login';
+    }
+  }
+
   getRoteiros(): void {
     this.http
       .get<any>('http://localhost:5500/roteiro/getRoteiro')
@@ -52,4 +58,6 @@ export class Tab1Page implements OnInit {
     const roteiroType = this.roteiroTypes.find((type: RoteiroType) => type.id === id);
     return roteiroType ? roteiroType.type : '';
   }
+
+
 }

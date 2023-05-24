@@ -25,11 +25,20 @@
 
           </div>
         </div>
-
-        
-
       </ion-card-content>
     </ion-card>
   </ng-container>
+
+  <ion-title>Recentes:</ion-title>
+
+  <ion-card *ngFor="let roteiro of ultimosRoteiros">
+    <ion-card-header>
+      <ion-card-title>{{ roteiro.nome }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ roteiro.type}}</p>
+      <p>{{ roteiro.descricao }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 

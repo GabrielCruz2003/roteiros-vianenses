@@ -1,18 +1,16 @@
 <ion-content>
   <ion-card *ngFor="let roteiro of roteiros">
     <ion-card-header>
-      <ion-card-title>{{ roteiro.nome }}</ion-card-title>
-      <ion-card-subtitle>{{ getRoteiroTypeName(roteiro.roteiro_type_id) }}</ion-card-subtitle>
+      <img
+      *ngFor="let imagem of roteiro.imagens"
+      [src]="getImageUrl(imagem.nome)"
+      alt="Imagem do roteiro"
+    >
     </ion-card-header>
     <ion-card-content>
+      <ion-card-title>{{ roteiro.nome }}</ion-card-title>
+      <ion-card-subtitle>{{ getRoteiroTypeName(roteiro.roteiro_type_id) }}</ion-card-subtitle>
       {{ roteiro.descricao }}
     </ion-card-content>
-    <div class="imagens">
-      <img
-        *ngFor="let imagem of roteiro.imagens"
-        [src]="getImageUrl(imagem.nome)"
-        alt="Imagem do roteiro"
-      >
-    </div>
     <ion-button fill="clear" color="dark">Ver Mais</ion-button>
   </ion-card>
