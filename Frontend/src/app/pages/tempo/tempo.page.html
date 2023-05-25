@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>tempo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="weatherData && weatherData.data">
+    <ion-card *ngFor="let forecast of weatherData.data">
+      <ion-card-header>
+        <p style="margin: 0;">{{ forecast.forecastDate | date:'dd/MM/yyyy' }}</p>
+        <h2 style="font-family: 'Poppins Bold'; margin: 0; padding: 5px 0;">Viana do Castelo</h2>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="conteudo-card">
+          <div class="card-esquerda">
+            <ul class="lista" style="display: flex; list-style: none; width: 50%; justify-content: space-around; margin: 0; padding: 0;">
+                <li style="background-color: #FFA234; padding: 5px; color: #FFF; font-weight: bold;">{{ forecast.tMax }}ºC</li>
+                <li style="background-color: #29BEFE; padding: 5px; color: #FFF; font-weight: bold;">{{ forecast.tMin }}ºC</li>
+            </ul>
+          </div>
+          <div>
+          <!-- icon da temperatura  -->
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>
+

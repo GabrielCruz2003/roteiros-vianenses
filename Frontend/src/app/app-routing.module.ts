@@ -21,17 +21,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'tab2',
-    loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
-  },
-  {
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
   },
   {
     path: 'criar-roteiro',
     loadChildren: () => import('./pages/criar-roteiro/criar-roteiro.module').then( m => m.CriarRoteiroPageModule)
+  },  {
+    path: 'tempo',
+    loadChildren: () => import('./pages/tempo/tempo.module').then( m => m.TempoPageModule)
   },
+
 
 
 ];

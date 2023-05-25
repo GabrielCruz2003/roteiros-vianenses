@@ -24,7 +24,7 @@ export class Tab2Page {
     this.carregarUltimosRoteiros();
   }
 
-  getWeatherData(): Observable<any> {
+   getWeatherData(): Observable<any> {
     const globalIdLocal = '1010500'; // Viana do Castelo
     const url = `https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/${globalIdLocal}.json`;
     return this.http.get<any>(url)
@@ -32,6 +32,7 @@ export class Tab2Page {
         tap(data => this.weatherData = data)
       );
   }
+
 
 
   ionViewWillEnter() {
@@ -56,7 +57,7 @@ export class Tab2Page {
       });
   }
 
-  
+
 
 }
 
