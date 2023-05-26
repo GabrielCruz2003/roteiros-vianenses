@@ -8,9 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
-
-
-
+import { RoteiroComponentsModule } from './components/roteiro-components/roteiro-components.module';
 
 
 @NgModule({
@@ -20,6 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NavController
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, RoteiroComponentsModule],
 })
 export class AppModule {}
