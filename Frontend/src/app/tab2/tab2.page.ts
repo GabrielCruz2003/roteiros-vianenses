@@ -6,6 +6,7 @@ import { RoteiroService } from '../services/roteiro-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -20,6 +21,7 @@ export class Tab2Page {
 
   weatherData: any = {};
   ultimosRoteiros: any = [];
+  roteiroTypes: any = [];
 
   ngOnInit() {
     this.carregarUltimosRoteiros();
@@ -55,6 +57,32 @@ export class Tab2Page {
         this.ultimosRoteiros = roteiros;
       });
   }
+
+  getRoteiroTypes(): void {
+    this.http
+      .get<any>('http://localhost:5500/roteiro/getRoteiroType')
+      .subscribe(
+        (response) => {
+          this.roteiroTypes = response;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
+
+  getRoteiroTypeName(roteiroTypeId: number): string {
+    const roteiroType = this.roteiroTypes.find((type: any) => type.id === roteiroTypeId);
+    return roteiroType ? roteiroType.type : '';
+  }
+
+
+  getImageUrl(nome: string): string {
+    return `http://localhost:5500/uploads/${nome}`;
+  }
+
+
+
 
   irTempo() {
     this.route.navigate(['/tempo']);
