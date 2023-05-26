@@ -7,27 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container *ngIf="weatherData && weatherData.data">
-    <ion-card *ngFor="let forecast of weatherData.data.slice(0, 1)">
-      <ion-card-header>
-        <h2>Viana do Castelo</h2>
-        {{ forecast.forecastDate | date:'dd/MM/yyyy' }}
-      </ion-card-header>
-      <ion-card-content>
-        <div class="conteudo-card">
-          <div class="card-esquerda">
-            <p>Temperatura: {{ forecast.tMax }}ºC</p>
-            <p>Pressão: {{ forecast.tMin }}ºC</p>
-            <p>Humidade: {{ forecast.precipitaProb }}</p>
-          </div>
-          <div>
-          <!-- icon da temperatura  -->
+  <ion-card (click)="irTempo()" color="primary">
+    <ion-card-header>
+      <ion-card-title>Viana do Castelo</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Meteorologia</p>
+    </ion-card-content>
+  </ion-card>
 
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </ng-container>
+  <app-side-menu></app-side-menu>
 
   <ion-title>Recentes:</ion-title>
 

@@ -1,10 +1,16 @@
 <ion-header>
   <ion-toolbar>
+    <ion-button (click)="voltar()">
+        Voltar
+    </ion-button>
     <ion-title>tempo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div style="width: 100%; text-align: center;">
+    <h2 style="font-family:'Poppins Medium' ; font-size: 18px">Previsão Metereológica 5 dias</h2>
+  </div>
   <ng-container *ngIf="weatherData && weatherData.data">
     <ion-card *ngFor="let forecast of weatherData.data">
       <ion-card-header>

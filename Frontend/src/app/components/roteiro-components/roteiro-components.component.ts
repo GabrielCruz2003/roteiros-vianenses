@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { getImageUrl } from './roteiro-utils';
 
-
 @Component({
   selector: 'app-roteiro-components',
   templateUrl: './roteiro-components.component.html',
@@ -53,5 +52,4 @@ export class RoteiroComponentsComponent implements OnInit {
     const roteiroType = this.roteiroTypes.find((type: any) => type.id === roteiroTypeId);
     return roteiroType ? roteiroType.type : '';
   }
-
 }

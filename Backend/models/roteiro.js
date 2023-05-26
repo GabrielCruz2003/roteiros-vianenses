@@ -22,8 +22,7 @@ const roteiroModel = db.define('roteiro', {
 });
 
 
-roteiroModel.hasMany(imagensModel, { foreignKey: 'roteiro_id' });
+roteiroModel.hasMany(imagensModel, { foreignKey: "roteiro_id" });
 roteiroModel.belongsTo(roteiroTypeModel, { foreignKey: 'roteiro_type_id' });
-
 
 export default roteiroModel;

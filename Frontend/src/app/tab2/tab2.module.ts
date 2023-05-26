@@ -1,3 +1,4 @@
+import { SideMenuModule } from './../components/side-menu/side-menu.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,8 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SideMenuModule
   ],
   declarations: [Tab2Page]
 })

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { RoteiroService } from '../services/roteiro-service';
 import { Inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -13,7 +14,7 @@ import { Inject } from '@angular/core';
 export class Tab2Page {
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient, private route: Router,
     @Inject(RoteiroService) private roteiroService: RoteiroService
     ) {}
 
@@ -24,7 +25,7 @@ export class Tab2Page {
     this.carregarUltimosRoteiros();
   }
 
-   getWeatherData(): Observable<any> {
+  getWeatherData(): Observable<any> {
     const globalIdLocal = '1010500'; // Viana do Castelo
     const url = `https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/${globalIdLocal}.json`;
     return this.http.get<any>(url)
@@ -32,8 +33,6 @@ export class Tab2Page {
         tap(data => this.weatherData = data)
       );
   }
-
-
 
   ionViewWillEnter() {
     if (localStorage.getItem('token') == null) {
@@ -57,8 +56,9 @@ export class Tab2Page {
       });
   }
 
-
-
+  irTempo() {
+    this.route.navigate(['/tempo']);
+  }
 }
 
 

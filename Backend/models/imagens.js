@@ -16,6 +16,8 @@ const imagensModel = db.define("imagens", {
 });
 
 
+
+
 export default imagensModel;
 
 

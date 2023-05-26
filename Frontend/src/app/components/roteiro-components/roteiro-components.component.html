@@ -2,10 +2,10 @@
   <ion-card *ngFor="let roteiro of roteiros">
     <ion-card-header>
       <img
-      *ngFor="let imagem of roteiro.imagens"
-      [src]="getImageUrl(imagem.nome)"
-      alt="Imagem do roteiro"
-    >
+        *ngFor="let imagem of roteiro.imagens"
+        [src]="getImageUrl(imagem.nome)"
+        alt="Imagem do roteiro"
+      >
     </ion-card-header>
     <ion-card-content>
       <ion-card-title>{{ roteiro.nome }}</ion-card-title>
@@ -14,3 +14,4 @@
     </ion-card-content>
     <ion-button fill="clear" color="dark">Ver Mais</ion-button>
   </ion-card>
+</ion-content>

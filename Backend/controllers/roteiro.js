@@ -37,6 +37,8 @@ export const createRoteiro = async (req, res) => {
     if (!nome || !descricao || !roteiro_type_id) {
         return res.status(400).json({ message: "Falta preencher algo" });
     }
+
+    console.log(roteiro_type_id);
     
     try {
         const roteiro = await roteiroModel.create({
@@ -52,18 +54,35 @@ export const createRoteiro = async (req, res) => {
 };
 
 export const getRoteiro = async (req, res) => {
-  try {
-    const roteiros = await roteiroModel.findAll({
-      include: imagensModel, // Inclui os dados relacionados do modelo de imagens
-    });
+    try {
+      const roteiros = await roteiroModel.findAll({
+        include: imagensModel,
+      });
+  
+      // Mapear os roteiros retornados e adicionar a URL completa das imagens
+      const roteirosComUrl = roteiros.map((roteiro) => {
+        const roteiroJson = roteiro.toJSON();
+        const imagensComUrl = roteiroJson.imagens.map((imagem) => {
+          return {
+            ...imagem,
+            url: `http://localhost:5500/uploads/${imagem.nome}`,
+          };
+        });
+  
+        return {
+          ...roteiroJson,
+          imagens: imagensComUrl,
+        };
+      });
+  
+      return res.status(200).json(roteirosComUrl);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Erro ao buscar roteiro" });
+    }
+  };
 
-    return res.status(200).json(roteiros);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Erro ao buscar roteiro" });
-  }
-};
-
+  
 export const getTypeRoteiro = async (req, res) => {
     try {
         const roteiros = await roteiroTypeModel.findAll({ 
@@ -88,7 +107,7 @@ export const addImagem = async (req, res) => {
 
     const { filename } = req.file;
     const time = new Date().getTime();
-    const nome = `${time}_${filename}`;
+    const nome = `${filename}`;
     
 
     try {

@@ -7,8 +7,6 @@ export const storage = multer.diskStorage({
         cb(null, path.resolve("uploads"));
     },
     filename: (req, file, cb) => {
-        const time = new Date().getTime();
-
-        cb(null, `${time}_${file.originalname}`);
+        cb(null, file.originalname);
     }
 });

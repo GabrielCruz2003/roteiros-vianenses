@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tempo',
@@ -11,8 +13,9 @@ import { tap } from 'rxjs/operators';
 export class TempoPage implements OnInit {
 
   weatherData: any = {};
+  iconPath: string = 'assets/imagens/tempo-icons/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: Router) { }
 
   ngOnInit() {
     this.getWeatherData().subscribe();
@@ -25,5 +28,9 @@ export class TempoPage implements OnInit {
       .pipe(
         tap(data => this.weatherData = data)
       );
+  }
+
+  voltar() {
+    this.route.navigate(['/tabs/tab2']);
   }
 }

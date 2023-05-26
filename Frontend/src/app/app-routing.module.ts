@@ -3,6 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
+import { SideMenuModule } from './components/side-menu/side-menu.module';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 
 
@@ -27,9 +29,14 @@ const routes: Routes = [
   {
     path: 'criar-roteiro',
     loadChildren: () => import('./pages/criar-roteiro/criar-roteiro.module').then( m => m.CriarRoteiroPageModule)
-  },  {
+  },
+  {
     path: 'tempo',
     loadChildren: () => import('./pages/tempo/tempo.module').then( m => m.TempoPageModule)
+  },
+  {
+    path: 'sidemenu',
+    loadChildren: () => import('./components/side-menu/side-menu.module').then( m => m.SideMenuModule)
   },
 
 
