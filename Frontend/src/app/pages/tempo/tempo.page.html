@@ -24,6 +24,7 @@
                 <li style="background-color: #FFA234; padding: 5px; color: #FFF; font-weight: bold;">{{ forecast.tMax }}ºC</li>
                 <li style="background-color: #29BEFE; padding: 5px; color: #FFF; font-weight: bold;">{{ forecast.tMin }}ºC</li>
             </ul>
+            <img [src]="getIconPath(forecast.idWeatherType)" alt="Weather Icon" >
           </div>
           <div>
           <!-- icon da temperatura  -->

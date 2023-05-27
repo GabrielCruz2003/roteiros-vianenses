@@ -30,6 +30,11 @@ export class TempoPage implements OnInit {
       );
   }
 
+  getIconPath(weatherTypeId: number): string {
+    return `assets/images/tempo-icons-png/w_ic_d_${weatherTypeId}.png`;
+  }
+
+
   voltar() {
     this.route.navigate(['/tabs/tab2']);
   }
