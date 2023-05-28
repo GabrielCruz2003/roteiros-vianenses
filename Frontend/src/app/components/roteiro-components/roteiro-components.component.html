@@ -12,6 +12,6 @@
       <ion-card-subtitle>{{ getRoteiroTypeName(roteiro.roteiro_type_id) }}</ion-card-subtitle>
       {{ roteiro.descricao }}
     </ion-card-content>
-    <ion-button fill="clear" color="dark">Ver Mais</ion-button>
+    <ion-button fill="clear" color="dark" (click)="verMais(roteiro.id, roteiro.nome, roteiro.imagens[0].nome, roteiro.descricao, roteiro.roteiro_type_id)">Ver Mais</ion-button>
   </ion-card>
 </ion-content>

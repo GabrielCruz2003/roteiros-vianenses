@@ -37,7 +37,11 @@ const routes: Routes = [
   {
     path: 'sidemenu',
     loadChildren: () => import('./components/side-menu/side-menu.module').then( m => m.SideMenuModule)
+  },  {
+    path: 'detalhes',
+    loadChildren: () => import('./pages/detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   },
+
 
 
 

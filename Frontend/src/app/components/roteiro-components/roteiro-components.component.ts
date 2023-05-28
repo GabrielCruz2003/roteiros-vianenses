@@ -1,6 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { getImageUrl } from './roteiro-utils';
+import { Router, NavigationExtras } from '@angular/router';
+
 
 @Component({
   selector: 'app-roteiro-components',
@@ -11,7 +14,7 @@ export class RoteiroComponentsComponent implements OnInit {
   roteiros: any = [];
   roteiroTypes: any = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.getRoteiros();
@@ -52,4 +55,24 @@ export class RoteiroComponentsComponent implements OnInit {
     const roteiroType = this.roteiroTypes.find((type: any) => type.id === roteiroTypeId);
     return roteiroType ? roteiroType.type : '';
   }
+
+
+  verMais(id: number, nome: string, imagem: string, descricao: string, tipo: number) {
+    const tipoRoteiro = this.getRoteiroTypeName(tipo);
+    const imageUrl = getImageUrl(imagem);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        roteiro: {
+          id: id,
+          nome: nome,
+          imagem: imageUrl,
+          descricao: descricao,
+          tipo: tipoRoteiro
+        }
+      }
+    };
+    this.router.navigate(['/detalhes'], navigationExtras);
+  }
+
+
 }
