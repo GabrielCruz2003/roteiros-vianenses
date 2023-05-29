@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize";
 import db from "../config/db.js";
 import UserTypeModel from "./user_type.js";
+import likesModel from "./likes.js";
+import comentariosModel from "./comentarios.js";
 
 const UserModel = db.define('users', {
     id: {
@@ -35,5 +37,7 @@ const UserModel = db.define('users', {
 });
 
 UserModel.belongsTo(UserTypeModel, { foreignKey: 'user_type_id' });
+likesModel.belongsTo(UserModel, { foreignKey: 'user_id' });
+comentariosModel.belongsTo(UserModel, { foreignKey: 'user_id' });
 
 export default UserModel;
