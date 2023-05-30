@@ -31,10 +31,10 @@ export const createTypeRoteiro = async (req, res) => {
 };
 
 export const createRoteiro = async (req, res) => {
-    const { nome, descricao, roteiro_type_id } = req.body;
+    const { nome, descricao, data,roteiro_type_id } = req.body;
   
     // Verifica se todos os campos estão preenchidos
-    if (!nome || !descricao || !roteiro_type_id) {
+    if (!nome || !descricao || !data ||!roteiro_type_id) {
         return res.status(400).json({ message: "Falta preencher algo" });
     }
 
@@ -44,6 +44,7 @@ export const createRoteiro = async (req, res) => {
         const roteiro = await roteiroModel.create({
         nome,
         descricao,
+        data,
         roteiro_type_id,
         });
         return res.status(201).json(roteiro);

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { getImageUrl } from './roteiro-utils';
 import { Router, NavigationExtras } from '@angular/router';
+import { format } from 'date-fns';
 
 
 @Component({
@@ -13,12 +14,16 @@ import { Router, NavigationExtras } from '@angular/router';
 export class RoteiroComponentsComponent implements OnInit {
   roteiros: any = [];
   roteiroTypes: any = [];
+  comentarios: any[] = [];
+
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.getRoteiros();
     this.getRoteiroTypes();
+
+
   }
 
   getRoteiros(): void {
@@ -57,7 +62,7 @@ export class RoteiroComponentsComponent implements OnInit {
   }
 
 
-  verMais(id: number, nome: string, imagem: string, descricao: string, tipo: number) {
+  verMais(id: number, nome: string, imagem: string, descricao: string, tipo: number,data: string ) {
     const tipoRoteiro = this.getRoteiroTypeName(tipo);
     const imageUrl = getImageUrl(imagem);
     const navigationExtras: NavigationExtras = {
@@ -67,11 +72,26 @@ export class RoteiroComponentsComponent implements OnInit {
           nome: nome,
           imagem: imageUrl,
           descricao: descricao,
-          tipo: tipoRoteiro
+          tipo: tipoRoteiro,
+          data: data
         }
       }
     };
     this.router.navigate(['/detalhes'], navigationExtras);
+
+  }
+
+  getComentariosByRoteiro(roteiroId: number): void {
+    this.http
+      .get<any>(`http://localhost:5500/comentario/comentarios/${roteiroId}`)
+      .subscribe(
+        (response) => {
+          this.comentarios = response;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
   }
 
 

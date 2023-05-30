@@ -6,10 +6,11 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // Define o destino do upload para a pasta 'uploads'
+        cb(null, 'uploads/img-users'); // Define o destino do upload para a pasta 'uploads'
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname); // Define o nome do arquivo com data e hora para evitar colisões de nomes
+        const originalName = file.originalname;
+        cb(null, originalName); // Define o nome do arquivo para o nome original
     }
 });
 
@@ -18,7 +19,7 @@ const upload = multer({ storage: storage });
 
 const userRoutes = Router();
 
-userRoutes.post("/create", createUser);
+userRoutes.post("/createUser",  upload.single('image'), createUser);
 
 userRoutes.post("/createTypeUser", createTypeUser);
 

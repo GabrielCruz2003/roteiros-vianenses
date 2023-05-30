@@ -1,0 +1,25 @@
+ion-card-header{
+  position: relative;
+}
+
+button{
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  cursor: pointer;
+  background: none;
+  outline: none;
+}
+
+
+.div-header
+{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.div-nome{
+  width: 60%;
+  text-align: center;
+}
