@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { getImageUrl } from './roteiro-utils';
 import { Router, NavigationExtras } from '@angular/router';
 import { format } from 'date-fns';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -15,15 +17,16 @@ export class RoteiroComponentsComponent implements OnInit {
   roteiros: any = [];
   roteiroTypes: any = [];
   comentarios: any[] = [];
+  comentarioForm!: FormGroup;
 
 
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private http: HttpClient, private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.getRoteiros();
     this.getRoteiroTypes();
-
-
+    this.initializeForm();
   }
 
   getRoteiros(): void {
@@ -92,6 +95,30 @@ export class RoteiroComponentsComponent implements OnInit {
           console.error(error);
         }
       );
+  }
+
+
+  criarComentario(roteiroId: number, comentario: string, userId: number): void {
+    this.http
+      .post<any>(`http://localhost:5500/comentario/createComentario`, {
+        roteiroId: roteiroId,
+        comentario: comentario,
+        userId: userId,
+      })
+      .subscribe(
+        (response) => {
+          this.getComentariosByRoteiro(roteiroId);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
+
+  initializeForm(): void {
+    this.comentarioForm = this.formBuilder.group({
+      comentario: ['', Validators.required],
+    });
   }
 
 

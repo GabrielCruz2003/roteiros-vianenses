@@ -18,10 +18,21 @@
     <ion-card-content>
       <h3>Começa {{ roteiro.data }}</h3>
       <p style="margin-top: 10px;">{{ roteiro.descricao }}</p>
-
       <ion-button expand="block" color="" style="margin-top: 20px ;">INSCREVER</ion-button>
     </ion-card-content>
   </ion-card>
+
+  <h2 class="titulo">Comentarios :</h2>
+
+  <!-- form para adicionar um comentario-->
+  <form [formGroup]="comentarioForm" (ngSubmit)="criarComentario()">
+    <ion-item>
+      <ion-label position="floating" >Escreve um comentário</ion-label>
+      <ion-textarea formControlName="comentario" required></ion-textarea>
+    </ion-item>
+    <ion-button type="submit" expand="block" fill="clear"><img src="../../../assets/images/add.svg" style="width: 25px; height: 25px; cursor: pointer;"></ion-button>
+  </form>
+
 
   <ion-card *ngFor="let comentario of comentarios" class="comentario-item">
     <ion-card-header>
@@ -31,13 +42,9 @@
       </div>
       <div class="div-nome">
         <ion-label><h2>{{ comentario.user.name }}</h2></ion-label>
+        <p>{{ comentario.comentario }}</p>
       </div>
     </div>
   </ion-card-header>
-    <ion-card-content>
-      <p>{{ comentario.comentario }}</p>
-    </ion-card-content>
   </ion-card>
-
-
 </ion-content>

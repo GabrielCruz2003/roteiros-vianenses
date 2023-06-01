@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { DetalhesPageRoutingModule } from './detalhes-routing.module';
 
 import { DetalhesPage } from './detalhes.page';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetalhesPageRoutingModule
+    DetalhesPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [DetalhesPage]
 })
