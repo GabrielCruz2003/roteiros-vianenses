@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/db.js";
 import roteiroModel from "./roteiro.js";
-import imagensModel from "./imagens.js";
+
 
 
 const roteiroTypeModel = db.define("roteiro_type", {
