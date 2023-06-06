@@ -9,14 +9,14 @@
 
 <ion-content>
   <ion-card>
-    <img [src]="roteiro?.imagem" alt="Imagem do Roteiro">
+    <img *ngIf="roteiro?.imagem" [src]="roteiro.imagem" alt="Imagem do Roteiro">
     <ion-card-header>
       <ion-card-title>{{ roteiro.nome }}</ion-card-title>
       <ion-card-subtitle>{{ roteiro.tipo }}</ion-card-subtitle>
      <button class="like"><img style="width: 30px; height: 30px;" src="../../../assets/icon/like.svg"></button>
     </ion-card-header>
     <ion-card-content>
-      <h3>Começa {{ roteiro.data }}</h3>
+      <h3 style="font-weight: bold; font-size: 16px;">Começa {{ roteiro.data }}</h3>
       <p style="margin-top: 10px;">{{ roteiro.descricao }}</p>
       <ion-button expand="block" color="" style="margin-top: 20px ;">INSCREVER</ion-button>
     </ion-card-content>

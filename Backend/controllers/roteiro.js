@@ -68,34 +68,24 @@ export const createRoteiro = async (req, res) => {
 
   
 
+// Busca todos os roteiros
 export const getRoteiro = async (req, res) => {
     try {
-      const roteiros = await roteiroModel.findAll({
-        include: imagensModel,
-      });
-  
-      // Mapear os roteiros retornados e adicionar a URL completa das imagens
-      const roteirosComUrl = roteiros.map((roteiro) => {
-        const roteiroJson = roteiro.toJSON();
-        const imagensComUrl = roteiroJson.imagens.map((imagem) => {
-          return {
-            ...imagem,
-            url: `http://localhost:5500/uploads/${imagem.nome}`,
-          };
+        const roteiros = await roteiroModel.findAll({
+            include: [
+                {
+                    model: roteiroTypeModel,
+                    as: "roteiro_type",
+                },
+            ],
         });
-  
-        return {
-          ...roteiroJson,
-          imagens: imagensComUrl,
-        };
-      });
-  
-      return res.status(200).json(roteirosComUrl);
+
+        return res.status(200).json(roteiros);
     } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Erro ao buscar roteiro" });
+        console.error(error);
+        return res.status(500).json({ message: "Erro ao buscar roteiro" });
     }
-  };
+};
 
   
 export const getTypeRoteiro = async (req, res) => {

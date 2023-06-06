@@ -5,6 +5,7 @@ import { getImageUrl } from './roteiro-utils';
 import { Router, NavigationExtras } from '@angular/router';
 import { format } from 'date-fns';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { type } from 'os';
 
 
 
@@ -65,9 +66,9 @@ export class RoteiroComponentsComponent implements OnInit {
   }
 
 
-  verMais(id: number, nome: string, imagem: string, descricao: string, tipo: number,data: string ) {
-    const tipoRoteiro = this.getRoteiroTypeName(tipo);
-    const imageUrl = getImageUrl(imagem);
+  verMais(id: number, nome: string, imagem: string, descricao: number, tipo: string, data: string) {
+    const tipoRoteiro = this.getRoteiroTypeName(parseInt(tipo, 10));
+    const imageUrl = this.getImageUrl(imagem);
     const navigationExtras: NavigationExtras = {
       state: {
         roteiro: {
@@ -81,8 +82,9 @@ export class RoteiroComponentsComponent implements OnInit {
       }
     };
     this.router.navigate(['/detalhes'], navigationExtras);
-
   }
+
+
 
   getComentariosByRoteiro(roteiroId: number): void {
     this.http

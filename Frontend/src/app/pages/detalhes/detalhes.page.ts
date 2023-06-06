@@ -4,8 +4,7 @@ import { format } from 'date-fns';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { verify } from 'jsonwebtoken';
-import {Jwt} from 'jsonwebtoken';
+
 
 
 
@@ -18,6 +17,8 @@ export class DetalhesPage implements OnInit {
   roteiro: any = [];
   comentarios: any[] = [];
   comentarioForm!: FormGroup;
+  roteiroTypes: any[] = [];
+
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +29,7 @@ export class DetalhesPage implements OnInit {
   ) {
     this.initializeForm(); // Inicialize o formulário no construtor
   }
+
 
   ngOnInit() {
     this.roteiro = history.state.roteiro;
@@ -67,19 +69,11 @@ export class DetalhesPage implements OnInit {
   criarComentario() {
     const comentario = this.comentarioForm.get('comentario')?.value;
     const roteiroId = this.roteiro.id;
- 
 
-
-    const jwt = require('jsonwebtoken');
-
-  // Assuming you have the token and secret key stored in variables
-  const token = localStorage.getItem('token') ;
-  const secretKey = '408312uasuifsn8913418432nfdus383~321';
 
   try {
-    const decoded = jwt.verify(token, secretKey);
+
     // The token is valid and has been successfully decoded
-    console.log(decoded);
   } catch (error) {
     // An error occurred while verifying the token
     console.error('Token verification failed:', error);

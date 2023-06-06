@@ -23,7 +23,7 @@
   <ion-card *ngFor="let roteiro of ultimosRoteiros">
     <ion-card-header>
       <img
-        *ngFor="let imagem of roteiro.imagens"
+        *ngFor="let imagem of roteiro.imagem"
         [src]="getImageUrl(imagem.nome)"
         alt="Imagem do roteiro"
       >
@@ -34,5 +34,6 @@
       {{ roteiro.descricao }}
     </ion-card-content>
   </ion-card>
+
 </ion-content>
 
