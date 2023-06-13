@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
   },
   {
+    path: 'welcome-autenticacao',
+    loadChildren: () => import('./pages/welcome-autenticacao/welcome-autenticacao.module').then( m => m.WelcomeAutenticacaoPageModule)
+  },
+  {
     path: 'criar-roteiro',
     loadChildren: () => import('./pages/criar-roteiro/criar-roteiro.module').then( m => m.CriarRoteiroPageModule)
   },
@@ -37,7 +41,8 @@ const routes: Routes = [
   {
     path: 'sidemenu',
     loadChildren: () => import('./components/side-menu/side-menu.module').then( m => m.SideMenuModule)
-  },  {
+  },
+  {
     path: 'detalhes',
     loadChildren: () => import('./pages/detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   },
