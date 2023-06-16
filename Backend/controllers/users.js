@@ -9,7 +9,7 @@ dotenv.config();
 
 
 export const createTypeUser = async (req, res) => {
-  const { type } = req.body;
+  const { type } = req.body;0
 
   // Verifica se todos os campos estão preenchidos
   if (!type) {
