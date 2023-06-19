@@ -94,35 +94,58 @@ export class DetalhesPage implements OnInit {
   criarComentario() {
     const comentario = this.comentarioForm.get('comentario')?.value;
     const roteiroId = this.roteiro.id;
+    const user_id = this.tokenService.getUserId();
+
+    if (user_id) {
+      this.http
+        .post<any>(`http://localhost:5500/comentario/createComentario`, {
+          user_id: user_id,
+          roteiro_id: roteiroId,
+          comentario: comentario,
+        })
+        .subscribe(
+          (response) => {
+            this.getComentarios(roteiroId);
+            this.comentarioForm.reset();
+            this.exibirToastSucesso('Comentário adicionado com sucesso!');
+
+          },
+          (error) => {
+            console.error(error);
+            this.exibirToastErro('Erro ao adicionar comentário!');
+          }
+        );
+    } else {
+      console.error('ID do usuário não disponível.');
+    }
 
 
-  try {
-
-    // The token is valid and has been successfully decoded
-  } catch (error) {
-    // An error occurred while verifying the token
-    console.error('Token verification failed:', error);
   }
 
 
-    this.http
-      .post<any>(`http://localhost:5500/comentario/createComentario`, {
-        roteiroId: roteiroId,
-        comentario: comentario,
-
-      })
-      .subscribe(
-        (response) => {
-          this.getComentarios(roteiroId);
-          this.comentarioForm.reset();
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+async exibirToastSucesso(mensagem: string) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 2000, // duração em milissegundos
+      position: 'bottom', // posição do toast
+      color: 'success' // cor do toast (opcional)
+    });
+    toast.present();
   }
 
-  async exibirToastSucesso(mensagem: string) {
+
+
+  async exibirToastErro(mensagem: string) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 2000, // duração em milissegundos
+      position: 'bottom', // posição do toast
+      color: 'danger' // cor do toast (opcional)
+    });
+    toast.present();
+  }
+
+  async exibirToastSucessoLike(mensagem: string) {
     const toast = await this.toastController.create({
       message: "Like adicionado com sucesso!",
       duration: 2000, // duração em milissegundos
@@ -144,7 +167,7 @@ export class DetalhesPage implements OnInit {
         })
         .subscribe(
           (response) => {
-            this.exibirToastSucesso('Like adicionado com sucesso!');
+            this.exibirToastSucessoLike('Like adicionado com sucesso!');
             this.roteiro.userLiked = response.userLiked;
           },
           (error) => {
