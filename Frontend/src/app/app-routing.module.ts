@@ -23,14 +23,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'welcome',
-    loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
-  },
-  {
-    path: 'welcome-autenticacao',
-    loadChildren: () => import('./pages/welcome-autenticacao/welcome-autenticacao.module').then( m => m.WelcomeAutenticacaoPageModule)
-  },
-  {
     path: 'criar-roteiro',
     loadChildren: () => import('./pages/criar-roteiro/criar-roteiro.module').then( m => m.CriarRoteiroPageModule)
   },

@@ -35,6 +35,8 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+
+
   register(name:string ,email: string, password: string): Observable<any> {
     const data = { name, email, password };
     return this.http.post('/api/register', data);

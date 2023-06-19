@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { format } from 'date-fns';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
+import { TokenService } from 'src/app/services/tokenService';
 
 
 
@@ -14,7 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./detalhes.page.scss'],
 })
 export class DetalhesPage implements OnInit {
-  roteiro: any = [];
+  roteiro: any = {
+    userLiked: false
+  };
   comentarios: any[] = [];
   comentarioForm!: FormGroup;
   roteiroTypes: any[] = [];
@@ -25,6 +30,9 @@ export class DetalhesPage implements OnInit {
     private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private toastController: ToastController,
+    private tokenService: TokenService
 
   ) {
     this.initializeForm(); // Inicialize o formulário no construtor
@@ -36,9 +44,26 @@ export class DetalhesPage implements OnInit {
     this.roteiro.data = format(new Date(this.roteiro.data), 'dd/MM/yyyy');
     console.log(this.roteiro);
 
-    // Obtém os comentários do roteiro
+    const user_id = this.tokenService.getUserId();
+    if (user_id) {
+      this.http
+        .get<boolean>(`http://localhost:5500/like/checkLike/${user_id}/${this.roteiro.id}`)
+        .subscribe(
+          (response) => {
+            this.roteiro.userLiked = response;
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+    }
+
     this.getComentarios(this.roteiro.id);
   }
+
+
+
+
 
   voltar() {
     this.router.navigate(['/tabs/tab1']);
@@ -96,6 +121,41 @@ export class DetalhesPage implements OnInit {
         }
       );
   }
+
+  async exibirToastSucesso(mensagem: string) {
+    const toast = await this.toastController.create({
+      message: "Like adicionado com sucesso!",
+      duration: 2000, // duração em milissegundos
+      position: 'bottom', // posição do toast
+      color: 'success' // cor do toast (opcional)
+    });
+    toast.present();
+  }
+
+  adicionarLike() {
+    const user_id = this.tokenService.getUserId();
+    const roteiro_id = this.roteiro.id;
+
+    if (user_id) {
+      this.http
+        .post<any>(`http://localhost:5500/like/addLike`, {
+          user_id: user_id,
+          roteiro_id: roteiro_id,
+        })
+        .subscribe(
+          (response) => {
+            this.exibirToastSucesso('Like adicionado com sucesso!');
+            this.roteiro.userLiked = response.userLiked;
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+    } else {
+      console.error('ID do usuário não disponível.');
+    }
+  }
+
 
 
 }

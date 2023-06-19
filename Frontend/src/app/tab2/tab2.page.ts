@@ -76,13 +76,9 @@ export class Tab2Page {
     return roteiroType ? roteiroType.type : '';
   }
 
-
   getImageUrl(nome: string): string {
     return `http://localhost:5500/uploads/${nome}`;
   }
-
-
-
 
   irTempo() {
     this.route.navigate(['/tempo']);

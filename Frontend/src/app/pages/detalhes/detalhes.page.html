@@ -13,7 +13,9 @@
     <ion-card-header>
       <ion-card-title>{{ roteiro.nome }}</ion-card-title>
       <ion-card-subtitle>{{ roteiro.tipo }}</ion-card-subtitle>
-     <button class="like"><img style="width: 30px; height: 30px;" src="../../../assets/icon/like.svg"></button>
+      <button class="like" [class.liked]="roteiro.userLiked" (click)="adicionarLike()">
+        <img style="width: 30px; height: 30px;" [src]="'/assets/images/icons/like.svg'" [style.fill]="roteiro.userLiked ? 'red' : 'initial'" />
+      </button>
     </ion-card-header>
     <ion-card-content>
       <h3 style="font-weight: bold; font-size: 16px;">Começa {{ roteiro.data }}</h3>
