@@ -30,7 +30,7 @@ export const createTypeUser = async (req, res) => {
 export const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   const user_type_id = 2;
-  const image = req.file.filename;
+  let image = req.file ? req.file.filename : "default.png";
 
   // Verifica se todos os campos estão preenchidos
   if (!name || !email || !password) {

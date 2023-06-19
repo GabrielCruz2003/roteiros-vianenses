@@ -19,29 +19,6 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  createUser() {
-    const userData = {
-      name: this.name,
-      email: this.email,
-      password: this.password,
-    };
-
-    this.http.post('http://localhost:5500/users/create', userData)
-      .subscribe(
-        response => {
-          console.log(response);
-          // Tratar a resposta do servidor, redirecionar ou exibir uma mensagem de sucesso
-            window.location.href = '/login';
-            this.exibirToastSucesso('Usuário criado com sucesso!');
-        },
-        error => {
-          console.error(error);
-          // Tratar o erro, exibir uma mensagem de erro
-          this.exibirToastErro('Erro ao criar usuário!');
-        }
-      );
-  }
-
   async exibirToastSucesso(mensagem: string) {
     const toast = await this.toastController.create({
       message: "Usuário criado com sucesso!",
@@ -61,5 +38,30 @@ export class RegisterPage implements OnInit {
     });
     toast.present();
   }
+
+  createUser() {
+    const userData = {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+    };
+
+    this.http.post('http://localhost:5500/users/createUser', userData)
+      .subscribe(
+        response => {
+          console.log(response);
+          // Tratar a resposta do servidor, redirecionar ou exibir uma mensagem de sucesso
+            window.location.href = '/login';
+            this.exibirToastSucesso('Usuário criado com sucesso!');
+        },
+        error => {
+          console.error(error);
+          // Tratar o erro, exibir uma mensagem de erro
+          this.exibirToastErro('Erro ao criar usuário!');
+        }
+      );
+  }
+
+
 
 }

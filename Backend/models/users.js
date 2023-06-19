@@ -24,7 +24,8 @@ const UserModel = db.define('users', {
     },
     image: {
         type: Sequelize.STRING,
-        defaultValue: 'default.png'
+        defaultValue: 'default.png',
+
     },
     user_type_id: {
         type: Sequelize.INTEGER,

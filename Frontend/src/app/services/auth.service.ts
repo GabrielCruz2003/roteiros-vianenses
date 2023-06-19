@@ -43,8 +43,9 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.get('/api/logout');
+    return this.http.post('/api/logout', {});
   }
+  
 
   isAuthenticated(): Observable<any> {
     return this.http.get('/api/is-authenticated');

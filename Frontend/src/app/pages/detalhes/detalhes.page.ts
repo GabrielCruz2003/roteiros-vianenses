@@ -127,7 +127,7 @@ async exibirToastSucesso(mensagem: string) {
     const toast = await this.toastController.create({
       message: mensagem,
       duration: 2000, // duração em milissegundos
-      position: 'bottom', // posição do toast
+      position: 'top', // posição do toast
       color: 'success' // cor do toast (opcional)
     });
     toast.present();
@@ -139,7 +139,7 @@ async exibirToastSucesso(mensagem: string) {
     const toast = await this.toastController.create({
       message: mensagem,
       duration: 2000, // duração em milissegundos
-      position: 'bottom', // posição do toast
+      position: 'top', // posição do toast
       color: 'danger' // cor do toast (opcional)
     });
     toast.present();
