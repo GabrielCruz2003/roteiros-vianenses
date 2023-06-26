@@ -47,12 +47,19 @@ export const createRoteiro = async (req, res) => {
             nomeImagem = filename;
         }
 
+        //verifica se o tipo de roteiro existe
+        const roteiro_type = await roteiroTypeModel.findByPk(roteiro_type_id);
+        if (!roteiro_type) {
+            return res.status(400).json({ message: "Tipo de roteiro não existe" });
+        }
+
+
         // Cria o roteiro com o nome da imagem
         const roteiro = await roteiroModel.create({
             nome,
             descricao,
             data,
-            roteiro_type_id,
+            roteiro_type_id,  // Salva o nome do tipo de roteiro
             imagem: nomeImagem, // Salva apenas o nome da imagem
         });
 
@@ -65,10 +72,6 @@ export const createRoteiro = async (req, res) => {
     }
 };
 
-
-  
-
-// Busca todos os roteiros
 export const getRoteiro = async (req, res) => {
     try {
         const roteiros = await roteiroModel.findAll({

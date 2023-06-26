@@ -1,48 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ul class="lista-header">
-      <li><img class="logo" src="../../assets/images/logotipo.png" alt="logo"></li>
-      <li>Editar Perfil</li>
-      <li><img class="img-defenicoes" src="../../assets/images/definicoes.png" alt="definições"></li>
-    </ul>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar></app-toolbar>
 
 <ion-content [fullscreen]="true">
-
   <section>
-
-      <div class="div-user ion-text-center">
-          <img src="../../assets/images/user_perfil.png" alt="user" class="user-foto"><br>
-          <button class="md-foto">Mudar Foto</button>
-      </div>
-  </section>
-
-
-  <section>
-    <div class="div-input ion-text-center">
-      <ion-item>
-        <ion-label position="floating">Primero Nome</ion-label>
-        <ion-input type="text" value="Guilherme"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Último Nome</ion-label>
-        <ion-input type="text" value="Magalhaes"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="text" value="gui@gmail.com"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input type="Password" value="naosei" ></ion-input>
-      </ion-item>
-    </div>
-
-    <div class="div-button ion-text-center">
-      <ion-button class="md-button" style="margin-top: 20px; font-family: 'Poppins Medium' ;">Guardar</ion-button>
+    <div class="div-user ion-text-center">
+      <img [src]="imagePath" alt="user" class="user-foto" /><br />
+      <h1 class="user-name">{{ userName }}</h1>
+      <button class="md-foto">Editar Foto</button>
     </div>
   </section>
 
-
+  <section>
+    <div>
+      <ion-button>Roteiros que gostei</ion-button>
+    </div>
+    <div>
+      <ion-button>Roteiros Inscritos</ion-button>
+    </div>
+  </section>
 </ion-content>

@@ -67,6 +67,44 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const getUsers = async (req, res) => {
+
+
+  try {
+    const users = await UserModel.findAll({
+      attributes: { exclude: ["password"] },
+      include: {
+        model: UserTypeModel,
+        attributes: ["type"],
+      },
+    });
+    return res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Erro ao buscar usuários" });
+  }
+};
+
+
+export const getUserById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await UserModel.findByPk(id, {
+      attributes: { exclude: ["password"] },
+      include: {
+        model: UserTypeModel,
+        attributes: ["type"],
+      },
+    });
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Erro ao buscar usuário" });
+  }
+};
+
+
 
 export const login = async (req, res) => {
   const { email, password } = req.body;

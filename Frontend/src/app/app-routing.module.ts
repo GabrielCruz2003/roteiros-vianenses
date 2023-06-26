@@ -3,8 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
-import { SideMenuModule } from './components/side-menu/side-menu.module';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
+
 
 
 
@@ -31,13 +30,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tempo/tempo.module').then( m => m.TempoPageModule)
   },
   {
-    path: 'sidemenu',
-    loadChildren: () => import('./components/side-menu/side-menu.module').then( m => m.SideMenuModule)
-  },
-  {
     path: 'detalhes',
     loadChildren: () => import('./pages/detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   },
+ 
+
 
 
 

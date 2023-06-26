@@ -9,8 +9,11 @@ import { AppComponent } from './app.component';
 import { NavController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { RoteiroComponentsModule } from './components/roteiro-components/roteiro-components.module';
+import { ToolbarModule } from './components/toolbar/toolbar.module';
+
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent ],
   imports: [
     BrowserModule,
     IonicModule.forRoot({ mode: "ios" }),
@@ -18,6 +21,9 @@ import { RoteiroComponentsModule } from './components/roteiro-components/roteiro
     FormsModule,
     RouterModule,
     HttpClientModule,
+    ToolbarModule
+
+
   ],
   providers: [
     {

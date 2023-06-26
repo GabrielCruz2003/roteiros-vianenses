@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { RoteiroComponentsComponent } from '../components/roteiro-components/roteiro-components.component';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    ToolbarModule
   ],
   declarations: [Tab1Page, RoteiroComponentsComponent]
 })

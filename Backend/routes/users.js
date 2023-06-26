@@ -1,5 +1,5 @@
 import Router from "express";
-import { createTypeUser, createUser, login } from "../controllers/users.js";
+import { createTypeUser, createUser, login, getUsers, getUserById } from "../controllers/users.js";
 import multer from "multer";
 
 
@@ -22,6 +22,10 @@ const userRoutes = Router();
 userRoutes.post("/createUser",  upload.single('image'), createUser);
 
 userRoutes.post("/createTypeUser", createTypeUser);
+
+userRoutes.get("/getUsers", getUsers);
+
+userRoutes.get("/getUserById/:id", getUserById);
 
 userRoutes.post("/login", login);
 

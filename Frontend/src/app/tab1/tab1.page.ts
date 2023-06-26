@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 interface RoteiroType {
   id: number;
@@ -15,7 +17,7 @@ export class Tab1Page implements OnInit {
   roteiros: any = [];
   roteiroTypes: RoteiroType[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.getRoteiros();
@@ -58,6 +60,11 @@ export class Tab1Page implements OnInit {
     const roteiroType = this.roteiroTypes.find((type: RoteiroType) => type.id === id);
     return roteiroType ? roteiroType.type : '';
   }
+
+  redirectToCriarRoteiro() {
+    this.router.navigate(['/criar-roteiro']);
+  }
+
 
 
 }

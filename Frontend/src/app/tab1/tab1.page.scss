@@ -1,43 +1,19 @@
-.lista-header{
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0;
-}
-
-.logo{
-  width: 50px;
-  height: 50px;
+.conteudo{
+  position: relative;
 }
 
 
-.img-defenicoes
-{
-  width: 30px;
-  height: 30px;
+.add{
+  background: none;
+  border: none;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
 }
 
-.lista-header li{
-  font-family: 'Poppins Medium';
-}
+.add img{
+  width: 40px;
+  height: 40px;
 
-
-/*----------------------------------------------------------------------------*/
-
-.sistema-filtrar{
-  display: flex;
-  width: 100%;
-  padding: 10px 0;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.filtrar-esquerda{
-  padding: 0px 30px 0 0;
-}
-
-.filtrar-esquerda h3{
-  font-family: 'Poppins Medium';
-  opacity: 0.5;
 }

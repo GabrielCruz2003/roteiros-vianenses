@@ -8,9 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { TokenService } from 'src/app/services/tokenService';
 
-
-
-
 @Component({
   selector: 'app-detalhes',
   templateUrl: './detalhes.page.html',
@@ -24,7 +21,6 @@ export class DetalhesPage implements OnInit {
   comentarioForm!: FormGroup;
   roteiroTypes: any[] = [];
 
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -33,11 +29,9 @@ export class DetalhesPage implements OnInit {
     private authService: AuthService,
     private toastController: ToastController,
     private tokenService: TokenService
-
   ) {
     this.initializeForm(); // Inicialize o formulário no construtor
   }
-
 
   ngOnInit() {
     this.roteiro = history.state.roteiro;
@@ -47,7 +41,7 @@ export class DetalhesPage implements OnInit {
     const user_id = this.tokenService.getUserId();
     if (user_id) {
       this.http
-        .get<boolean>(`http://localhost:5500/like/checkLike/${user_id}/${this.roteiro.id}`)
+        .get<boolean>(`http://localhost:5500/like/getLikes/${user_id}/${this.roteiro.id}`)
         .subscribe(
           (response) => {
             this.roteiro.userLiked = response;
@@ -60,10 +54,6 @@ export class DetalhesPage implements OnInit {
 
     this.getComentarios(this.roteiro.id);
   }
-
-
-
-
 
   voltar() {
     this.router.navigate(['/tabs/tab1']);
@@ -89,8 +79,6 @@ export class DetalhesPage implements OnInit {
     });
   }
 
-
-
   criarComentario() {
     const comentario = this.comentarioForm.get('comentario')?.value;
     const roteiroId = this.roteiro.id;
@@ -108,7 +96,6 @@ export class DetalhesPage implements OnInit {
             this.getComentarios(roteiroId);
             this.comentarioForm.reset();
             this.exibirToastSucesso('Comentário adicionado com sucesso!');
-
           },
           (error) => {
             console.error(error);
@@ -118,39 +105,34 @@ export class DetalhesPage implements OnInit {
     } else {
       console.error('ID do usuário não disponível.');
     }
-
-
   }
 
-
-async exibirToastSucesso(mensagem: string) {
+  async exibirToastSucesso(mensagem: string) {
     const toast = await this.toastController.create({
       message: mensagem,
       duration: 2000, // duração em milissegundos
       position: 'top', // posição do toast
-      color: 'success' // cor do toast (opcional)
+      color: 'success', // cor do toast (opcional)
     });
     toast.present();
   }
-
-
 
   async exibirToastErro(mensagem: string) {
     const toast = await this.toastController.create({
       message: mensagem,
       duration: 2000, // duração em milissegundos
       position: 'top', // posição do toast
-      color: 'danger' // cor do toast (opcional)
+      color: 'danger', // cor do toast (opcional)
     });
     toast.present();
   }
 
   async exibirToastSucessoLike(mensagem: string) {
     const toast = await this.toastController.create({
-      message: "Like adicionado com sucesso!",
+      message: mensagem,
       duration: 2000, // duração em milissegundos
       position: 'bottom', // posição do toast
-      color: 'success' // cor do toast (opcional)
+      color: 'success', // cor do toast (opcional)
     });
     toast.present();
   }
@@ -171,16 +153,15 @@ async exibirToastSucesso(mensagem: string) {
             this.roteiro.userLiked = response.userLiked;
           },
           (error) => {
-            console.error(error);
+            if (error.error && error.error.error === 'Usuário já deu like') {
+              this.exibirToastErro('Usuário já deu like!');
+            } else {
+              console.error(error);
+            }
           }
         );
     } else {
-      console.error('ID do usuário não disponível.');
+      // Lógica para lidar com a ausência de user_id
     }
   }
-
-
-
 }
-
-

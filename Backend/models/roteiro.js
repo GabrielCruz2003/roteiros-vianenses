@@ -28,8 +28,11 @@ const roteiroModel = db.define('roteiro', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    
+
 });
 
+// Relacionamentos
 roteiroModel.belongsTo(roteiroTypeModel, { foreignKey: 'roteiro_type_id' });
 likesModel.belongsTo(roteiroModel, { foreignKey: 'roteiro_id' });
 comentariosModel.belongsTo(roteiroModel, { foreignKey: 'roteiro_id' });
