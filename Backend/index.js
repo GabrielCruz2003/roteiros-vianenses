@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import path from "path";
 import { storage } from "./config/multerconfig.js";
+import inscricoesModel from "./models/inscricoes.js";
 
 config();
 

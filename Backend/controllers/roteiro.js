@@ -33,6 +33,9 @@ export const createRoteiro = async (req, res) => {
     const { nome, descricao, data, roteiro_type_id } = req.body;
     const imagem = req.file;
 
+    
+
+
     // Verifica se todos os campos estão preenchidos
     if (!nome || !descricao || !data || !roteiro_type_id) {
         return res.status(400).json({ message: "Falta preencher algo" });
