@@ -1,8 +1,10 @@
 <app-toolbar></app-toolbar>
 
 <ion-content class="conteudo" [fullscreen]="true">
-    <app-roteiro-components></app-roteiro-components>
 
-    <button class="add" (click)="redirectToCriarRoteiro()" ><img src="assets/images/icons/add.png"></button>
+    <app-roteiro-components></app-roteiro-components>
+    <div class="botao-div">
+      <ion-button class="add" (click)="redirectToCriarRoteiro()" >Criar Roteiro</ion-button>
+    </div>
 </ion-content>
 

@@ -1,15 +1,17 @@
-.conteudo{
-  position: relative;
-}
 
+.botao-div{
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
 
 .add{
   background: none;
   border: none;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-
+  font-family: 'Poppins Medium';
+  margin-top: 10px;
+  width: 80%;
+  margin-bottom: 10px;
 }
 
 .add img{
@@ -17,3 +19,4 @@
   height: 40px;
 
 }
+

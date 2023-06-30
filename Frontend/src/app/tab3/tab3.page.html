@@ -3,9 +3,9 @@
 <ion-content [fullscreen]="true">
   <section>
     <div class="div-user ion-text-center">
-      <img [src]="imagePath" alt="user" class="user-foto" /><br />
+      <img [src]="'http://localhost:5500/uploads/img-users/'+ userPhoto" alt="user" class="user-foto" /><br />
       <h1 class="user-name">{{ userName }}</h1>
-      <button class="md-foto">Editar Foto</button>
+      <button class="md-foto">Editar Perfil</button>
     </div>
   </section>
 
@@ -15,6 +15,9 @@
     </div>
     <div>
       <ion-button>Roteiros Inscritos</ion-button>
+    </div>
+    <div>
+      <ion-button color="danger" (click)="logout()">Logout</ion-button>
     </div>
   </section>
 </ion-content>

@@ -17,7 +17,7 @@ export class Tab3Page {
   userPhoto: string = '';
   userName: string = '';
 
-  imagePath = `http://localhost:5500/uploads/img-users/${this.userPhoto}`;
+
 
 
 
@@ -46,5 +46,10 @@ export class Tab3Page {
   getUserDetails(userId: number) {
     const url = `http://localhost:5500/users/getUserById/${userId}`;
     return this.http.get<User>(url);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
   }
 }
