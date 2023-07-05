@@ -4,6 +4,8 @@ import roteiroTypeModel from "../models/roteiro_type.js";
 import roteiroRoutes from "../routes/roteiro.js";
 import multer from "multer";
 import { storage } from "../config/multerconfig.js";
+import UserModel from "../models/users.js";
+import UserTypeModel from "../models/user_type.js";
 
 
 const upload = multer({ storage: storage });
@@ -30,50 +32,59 @@ export const createTypeRoteiro = async (req, res) => {
 };
 
 export const createRoteiro = async (req, res) => {
-    const { nome, descricao, data, roteiro_type_id } = req.body;
-    const imagem = req.file;
+  const { nome, descricao, data, roteiro_type_id, user_id } = req.body;
+  const imagem = req.file;
 
+  // Verifica se todos os campos estão preenchidos
+  if (!nome || !descricao || !data || !roteiro_type_id || !user_id) {
+    return res.status(400).json({ message: "Falta preencher algo" });
+  }
+
+  try {
+    let nomeImagem = null;
+
+    // Se houver uma imagem, extrai o nome dela
+    if (imagem) {
+      const { filename } = imagem;
+      nomeImagem = filename;
+    }
+
+    // Verifica se o tipo de usuário é admin
+    const user = await UserModel.findByPk(user_id, {
+      include: {
+        model: UserTypeModel,
+        attributes: ['type'],
+      },
+    });
     
-
-
-    // Verifica se todos os campos estão preenchidos
-    if (!nome || !descricao || !data || !roteiro_type_id) {
-        return res.status(400).json({ message: "Falta preencher algo" });
+    if (!user || user.user_type.type !== 'admin') {
+      return res.status(400).json({ message: "Usuário não tem permissão para criar roteiros" });
     }
 
-    try {
-        let nomeImagem = null;
-
-        // Se houver uma imagem, extrai o nome dela
-        if (imagem) {
-            const { filename } = imagem;
-            nomeImagem = filename;
-        }
-
-        //verifica se o tipo de roteiro existe
-        const roteiro_type = await roteiroTypeModel.findByPk(roteiro_type_id);
-        if (!roteiro_type) {
-            return res.status(400).json({ message: "Tipo de roteiro não existe" });
-        }
-
-
-        // Cria o roteiro com o nome da imagem
-        const roteiro = await roteiroModel.create({
-            nome,
-            descricao,
-            data,
-            roteiro_type_id,  // Salva o nome do tipo de roteiro
-            imagem: nomeImagem, // Salva apenas o nome da imagem
-        });
-
-        // Se houver uma imagem, cria o registro da imagem associada ao roteiro
-
-        return res.status(201).json(roteiro);
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Erro ao criar roteiro" });
+    // Verifica se o tipo de roteiro existe
+    const roteiroType = await roteiroTypeModel.findByPk(roteiro_type_id);
+    if (!roteiroType) {
+      return res.status(400).json({ message: "Tipo de roteiro não existe" });
     }
+
+    // Cria o roteiro com o nome da imagem
+    const roteiro = await roteiroModel.create({
+      nome,
+      descricao,
+      data,
+      roteiro_type_id,
+      imagem: nomeImagem,
+    });
+
+    // Se houver uma imagem, cria o registro da imagem associada ao roteiro
+
+    return res.status(201).json(roteiro);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Erro ao criar roteiro" });
+  }
 };
+
 
 export const getRoteiro = async (req, res) => {
     try {

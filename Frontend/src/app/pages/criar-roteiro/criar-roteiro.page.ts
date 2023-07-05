@@ -1,14 +1,16 @@
+import { ToastController } from '@ionic/angular';
+import { TokenService } from 'src/app/services/tokenService';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { windowWhen } from 'rxjs';
-import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 
 interface TipoRoteiro {
   id: number;
   type: string;
 }
 
-interface roteiro {
+interface Roteiro {
   id: number;
   nome: string;
   descricao: string;
@@ -33,32 +35,38 @@ export class CriarRoteiroPage implements OnInit {
 
   tiposRoteiro: TipoRoteiro[] = [];
 
-  constructor(private http: HttpClient, private toastController: ToastController) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private tokenService: TokenService,
+    public toastController: ToastController
+  ) {}
 
   ngOnInit() {
     this.getTiposRoteiro();
   }
 
-
-
   getTiposRoteiro() {
-    this.http.get<TipoRoteiro[]>('http://localhost:5500/roteiro/getRoteiroType').subscribe(
-      (response) => {
-        this.tiposRoteiro = response;
-      },
-      (error) => {
-        console.log('Erro ao criar o roteiro:', error);
-        console.log('Resposta do servidor:', error.error);
-      }
-    );
+    this.http
+      .get<TipoRoteiro[]>('http://localhost:5500/roteiro/getRoteiroType')
+      .subscribe(
+        (response) => {
+          this.tiposRoteiro = response;
+        },
+        (error) => {
+          console.log('Erro ao criar o roteiro:', error);
+          console.log('Resposta do servidor:', error.error);
+        }
+      );
   }
 
-
-
-
   criarRoteiro() {
-
-    if (!this.nomeRoteiro || !this.descricaoRoteiro || !this.dataRoteiro || !this.tipoRoteiro) {
+    if (
+      !this.nomeRoteiro ||
+      !this.descricaoRoteiro ||
+      !this.dataRoteiro ||
+      !this.tipoRoteiro
+    ) {
       console.log('Preencha todos os campos obrigatórios.');
       return;
     }
@@ -73,21 +81,24 @@ export class CriarRoteiroPage implements OnInit {
     formData.append('descricao', this.descricaoRoteiro);
     formData.append('data', this.dataRoteiro);
     formData.append('roteiro_type_id', String(this.tipoRoteiro));
+    formData.append('user_id', String(this.tokenService.getUserId())); // Obtém o user_id do TokenService
     formData.append('imagem', this.imagem);
 
-    this.http.post<roteiro>('http://localhost:5500/roteiro/createRoteiro', formData).subscribe(
-    (response) => {
-      console.log('Roteiro criado com sucesso:', response);
-      this.toastDeSucesso('Roteiro criado com sucesso!');
-      window.location.href = '/tabs/tab1';
+    this.http
+      .post<Roteiro>('http://localhost:5500/roteiro/createRoteiro', formData)
+      .subscribe(
+        (response) => {
+          console.log('Roteiro criado com sucesso:', response);
+          this.router.navigate(['/tabs/tab1']); // Redireciona para a rota '/tabs/tab1'
+          this.presentToastSucesso('Roteiro criado com sucesso!');
+        },
+        (error) => {
+          console.log('Erro ao criar o roteiro:', error);
+          console.log('Resposta do servidor:', error.error);
+          this.presentToastErro(error.error.message);
 
-    },
-    (error) => {
-      console.log('Erro ao criar o roteiro:', error);
-      console.log('Resposta do servidor:', error.error);
-      // Lógica para lidar com erros ao criar o roteiro
-    }
-  );
+        }
+      );
   }
 
   onFileChange(event: any) {
@@ -95,21 +106,25 @@ export class CriarRoteiroPage implements OnInit {
     this.imagem = files.item(0);
   }
 
+  //toast que mostra o erro
+  async presentToastErro(message : string) {
+    const toast = await this.toastController.create({
+      message: message,
+      color: 'danger',
+      duration: 2000
+    });
+    toast.present();
+  }
 
+  //toast que mostra o sucesso
+  async presentToastSucesso(message : string) {
+    const toast = await this.toastController.create({
+      message: message,
+      color: 'success',
+      duration: 2000
+    });
+    toast.present();
+  }
 
-   //toast de sucesso
- async toastDeSucesso(mensagem: string) {
-  const toast = await this.toastController.create({
-    message: mensagem,
-    duration: 4000,
-    color: 'success',
-    position: 'bottom',
-  });
 
 }
-
-
-
-}
-
-

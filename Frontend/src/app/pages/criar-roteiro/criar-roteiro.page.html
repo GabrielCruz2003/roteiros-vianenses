@@ -14,7 +14,9 @@
 
         <ion-item>
           <ion-label position="stacked">Tipo de Roteiro</ion-label>
-          <ion-input [(ngModel)]="tipoRoteiro" name="tipoRoteiro" placeholder="Selecione o tipo de roteiro"></ion-input>
+          <ion-select [(ngModel)]="tipoRoteiro" name="tipoRoteiro" placeholder="Selecione o tipo de roteiro">
+            <ion-select-option *ngFor="let tipo of tiposRoteiro" [value]="tipo.id">{{ tipo.type }}</ion-select-option>
+          </ion-select>
         </ion-item>
 
         <ion-item>

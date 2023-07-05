@@ -1,6 +1,8 @@
+import { TokenService } from 'src/app/services/tokenService';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+
 
 
 interface RoteiroType {
@@ -16,12 +18,15 @@ interface RoteiroType {
 export class Tab1Page implements OnInit {
   roteiros: any = [];
   roteiroTypes: RoteiroType[] = [];
+  isAdmin = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) {}
 
   ngOnInit(): void {
     this.getRoteiros();
     this.getRoteiroTypes();
+    this.checkAdminStatus();
   }
 
   ionViewWillEnter() {
@@ -60,6 +65,12 @@ export class Tab1Page implements OnInit {
     const roteiroType = this.roteiroTypes.find((type: RoteiroType) => type.id === id);
     return roteiroType ? roteiroType.type : '';
   }
+
+  async checkAdminStatus() {
+    const userType = await this.tokenService.getUserType();
+    this.isAdmin = userType === 'admin';
+  }
+
 
   redirectToCriarRoteiro() {
     this.router.navigate(['/criar-roteiro']);

@@ -1,10 +1,8 @@
 <app-toolbar></app-toolbar>
 
 <ion-content class="conteudo" [fullscreen]="true">
-
     <app-roteiro-components></app-roteiro-components>
     <div class="botao-div">
-      <ion-button class="add" (click)="redirectToCriarRoteiro()" >Criar Roteiro</ion-button>
+      <ion-button class="add" *ngIf="isAdmin" (click)="redirectToCriarRoteiro()">Criar Roteiro</ion-button>
     </div>
 </ion-content>
-

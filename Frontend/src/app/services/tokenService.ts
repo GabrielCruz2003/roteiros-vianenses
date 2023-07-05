@@ -1,11 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
   getToken(): string | null {
     return localStorage.getItem('token');
@@ -18,5 +18,24 @@ export class TokenService {
       return payload.id;
     }
     return null;
+  }
+
+  getUserType(): Promise<string | null> {
+    const userId = this.getUserId();
+    if (userId) {
+      return this.http
+        .get<any>('http://localhost:5500/users/getUsers')
+        .toPromise()
+        .then((users: any[]) => {
+          const user = users.find(u => u.id === userId);
+          return user ? user.user_type.type : null;
+        })
+        .catch(error => {
+          console.error('Erro ao obter o tipo de usuário:', error);
+          return null;
+        });
+    } else {
+      return Promise.resolve(null);
+    }
   }
 }
