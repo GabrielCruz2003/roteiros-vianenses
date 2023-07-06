@@ -1,4 +1,5 @@
 import likesModel from '../models/likes.js';
+import roteiroModel from '../models/roteiro.js';
 
 
 
@@ -13,6 +14,7 @@ export const getLikes = async (req, res) => {
                 roteiro_id: roteiro_id
             }
         });
+       
 
         res.json(likes);
        
@@ -61,3 +63,27 @@ export const addLike = async (req, res) => {
 
 }
 
+export const getLikesByUser = async (req, res) => {
+    try {
+        const { user_id } = req.params;
+
+
+
+       //buscar todos os likes do usuario incluindo o roteiro
+        const likes = await likesModel.findAll({
+            where: {
+                user_id: user_id
+            },
+            include: [{
+                model: roteiroModel,
+                required: true
+            }]
+        });
+
+        res.json(likes);
+       
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Erro ao obter likes' });
+    }
+}

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Roteiros Inscritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list style="margin-top: 50px ;">
+    <ion-item *ngFor="let inscricao of inscricoes">
+      <ion-thumbnail slot="start">
+        <img [src]="'http://localhost:5500/uploads/' + inscricao.roteiro.imagem" alt="Imagem do roteiro">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ inscricao.roteiro.nome }}</h2>
+        <p>{{ inscricao.roteiro.descricao }}</p>
+        <p>Data: {{ inscricao.roteiro.data }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -137,6 +137,26 @@ export class DetalhesPage implements OnInit {
     toast.present();
   }
 
+  async exibirToastSucessoInscricao(mensagem: string) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 2000,
+      position: 'bottom',
+      color: 'success',
+    });
+    toast.present();
+  }
+
+    async exibirToastErroInscricao(mensagem: string) {
+      const toast = await this.toastController.create({
+        message: mensagem,
+        duration: 2000,
+        position: 'bottom',
+        color: 'danger',
+      });
+      toast.present();
+    }
+
   adicionarLike() {
     const user_id = this.tokenService.getUserId();
     const roteiro_id = this.roteiro.id;
@@ -164,4 +184,27 @@ export class DetalhesPage implements OnInit {
       // Lógica para lidar com a ausência de user_id
     }
   }
+
+  inscrever(): void {
+    const user_id = this.tokenService.getUserId();
+    if (user_id) {
+      const roteiro_id = this.roteiro.id;
+      this.http
+        .post<any>(`http://localhost:5500/inscricoes/createInscricao`, {
+          roteiro_id: roteiro_id,
+          user_id: user_id,
+        })
+        .subscribe(
+          (response) => {
+            this.exibirToastSucessoInscricao('Inscrição realizada com sucesso!');
+          },
+          (error) => {
+            console.error(error);
+            //mostrar o erro do backend
+            this.exibirToastErroInscricao(error.error.mensagem);
+          }
+        );
+    }
+  }
+
 }

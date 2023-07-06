@@ -33,9 +33,14 @@ const routes: Routes = [
     path: 'detalhes',
     loadChildren: () => import('./pages/detalhes/detalhes.module').then( m => m.DetalhesPageModule)
   },
- 
-
-
+  {
+    path: 'roteiros-gostados/:user_id',
+    loadChildren: () => import('./pages/roteiros-gostados/roteiros-gostados.module').then( m => m.RoteirosGostadosPageModule)
+  },
+  {
+    path: 'roteiros-inscritos/:user_id',
+    loadChildren: () => import('./pages/roteiros-inscritos/roteiros-inscritos.module').then( m => m.RoteirosInscritosPageModule)
+  },
 
 
 

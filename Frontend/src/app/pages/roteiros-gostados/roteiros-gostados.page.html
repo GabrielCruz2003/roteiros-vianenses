@@ -1,0 +1,23 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Roteiros Gostados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let like of likes">
+      <ion-thumbnail slot="start">
+        <img [src]="'http://localhost:5500/uploads/' + like.roteiro.imagem " alt="Imagem do Roteiro">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ like.roteiro.nome }}</h2>
+        <p>{{ like.roteiro.descricao }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

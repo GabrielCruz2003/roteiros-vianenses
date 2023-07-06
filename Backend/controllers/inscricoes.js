@@ -27,22 +27,6 @@ export const createInscricao = async (req, res) => {
         return res.status(400).json({mensagem: "Usuário já inscrito no roteiro!"});
     }
 
-    //o usuario nao pode se inscrever em dois roteiros com a mesma data
-    const inscricoes = await inscricoesModel.findAll({where: {user_id: user_id}});
-    if(inscricoes){
-        for(let i = 0; i < inscricoes.length; i++){
-            const roteiro = await roteiroModel.findOne({where: {id: inscricoes[i].roteiro_id}});
-            if(roteiro){
-                const dataRoteiro = new Date(roteiro.data);
-                if(dataRoteiro == dataRoteiro){
-                    return res.status(400).json({mensagem: "Usuário já inscrito em um roteiro com a mesma data!"});
-                }
-            }
-        }
-    }
-    
-
- 
     try {
         const data = await inscricoesModel.create(req.body);
         return res.status(201).json(data);
@@ -72,3 +56,25 @@ export const getInscricao = async (req, res) => {
     }
 };
 
+
+export const getInscricaoByUser = async (req, res) => {
+    const { user_id } = req.params;
+    try {
+        const data = await inscricoesModel.findAll({
+            where: {user_id: user_id},
+            include: [
+                {
+                    model: UserModel,
+                    as: "user",
+                },
+                {
+                    model: roteiroModel,
+                    as: "roteiro",
+                },
+            ],
+        });
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+};

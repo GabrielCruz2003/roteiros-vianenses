@@ -52,4 +52,18 @@ export class Tab3Page {
     localStorage.removeItem('token');
     window.location.href = '/login';
   }
+
+  redirectToRoteirosGostados() {
+    const userId = this.tokenService.getUserId();
+    if (userId) {
+      window.location.href = `/roteiros-gostados/${userId}`;
+    }
+  }
+
+  redirectToRoteirosInscritos() {
+    const userId = this.tokenService.getUserId();
+    if (userId) {
+      window.location.href = `/roteiros-inscritos/${userId}`;
+    }
+  }
 }
