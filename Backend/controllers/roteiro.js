@@ -6,6 +6,8 @@ import multer from "multer";
 import { storage } from "../config/multerconfig.js";
 import UserModel from "../models/users.js";
 import UserTypeModel from "../models/user_type.js";
+import inscricoesModel from "../models/inscricoes.js";
+import likesModel from "../models/likes.js";
 
 
 const upload = multer({ storage: storage });
@@ -162,10 +164,27 @@ export const eliminarRoteiro = async (req, res) => {
     return res.status(400).json({ mensagem: "Roteiro não existe" });
   }
 
+
+
   try {
+    
     await roteiroModel.destroy({
       where: {
         id: roteiro_id,
+      },
+    });
+
+    // Elimina as inscrições associadas ao roteiro
+    await inscricoesModel.destroy({
+      where: {
+        roteiro_id: roteiro_id,
+      },
+    });
+
+    // Elimina os likes associados ao roteiro
+    await likesModel.destroy({
+      where: {
+        roteiro_id: roteiro_id,
       },
     });
 

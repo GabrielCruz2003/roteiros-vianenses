@@ -2,5 +2,10 @@
   <ion-toolbar>
     <ion-img src="assets/images/logos/logotipo.png" slot="start" class="logo"></ion-img>
     <ion-title>Roteiros Vianenses</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="refreshPage()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
