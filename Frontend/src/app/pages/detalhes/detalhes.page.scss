@@ -2,7 +2,7 @@ ion-card-header{
   position: relative;
 }
 
-button{
+.like{
   position: absolute;
   right: 30px;
   top: 30px;
@@ -50,6 +50,29 @@ button{
 
 
 
+.like ion-icon.liked {
+  color: red;
+}
+
+.div-eliminar{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.btn-eliminar{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.lixo{
+  width: 40px;
+  height: 40px;
+}
 
 
 

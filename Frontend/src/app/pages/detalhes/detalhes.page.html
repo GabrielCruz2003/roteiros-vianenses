@@ -1,8 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button (click)="voltar()">
-      Voltar
-   </ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="voltar()" >
+        Voltar
+      </ion-back-button>
+    </ion-buttons>
     <ion-title>Detalhes</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,13 +16,14 @@
       <ion-card-title>{{ roteiro.nome }}</ion-card-title>
       <ion-card-subtitle>{{ roteiro.tipo }}</ion-card-subtitle>
       <button class="like" (click)="adicionarLike()">
-        <ion-icon [name]="roteiro.userLiked ? 'heart' : 'heart-outline'" [style.color]="roteiro.userLiked ? 'red' : ''" style="width: 35px; height:35px"></ion-icon>
+        <ion-icon [name]="roteiro.userLiked ? 'heart' : 'heart-outline'" [class.liked]="roteiro.userLiked" style="width: 35px; height:35px"></ion-icon>
       </button>
     </ion-card-header>
     <ion-card-content>
       <h3 style="font-weight: bold; font-size: 16px;">Começa {{ roteiro.data }}</h3>
       <p style="margin-top: 10px;">{{ roteiro.descricao }}</p>
-      <ion-button expand="block" color="" style="margin-top: 20px ;" (click)="inscrever()">INSCREVER</ion-button>
+      <ion-button expand="block" color="" style="margin-top: 30px ; font-family: 'Poppins Medium';" (click)="inscrever()">INSCREVER</ion-button>
+      <ion-button *ngIf="isAdmin" (click)="eliminarRoteiro()" expand="block" color="danger" style="margin-top: 5px ; font-family: 'Poppins Medium';">APAGAR ROTEIRO</ion-button>
     </ion-card-content>
   </ion-card>
 

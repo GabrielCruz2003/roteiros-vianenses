@@ -3,7 +3,7 @@ import multer from "multer";
 import { createRoteiro } from "../controllers/roteiro.js";
 import { createTypeRoteiro } from "../controllers/roteiro.js";
 import { getRoteiro } from "../controllers/roteiro.js";
-
+import { eliminarRoteiro } from "../controllers/roteiro.js";
 import { storage } from "../config/multerconfig.js";
 import { getTypeRoteiro } from "../controllers/roteiro.js";
 
@@ -20,6 +20,8 @@ roteiroRoutes.post("/createTypeRoteiro", createTypeRoteiro);
 roteiroRoutes.get("/getRoteiro", getRoteiro);
 
 roteiroRoutes.get("/getRoteiroType", getTypeRoteiro)
+
+roteiroRoutes.delete("/deleteRoteiro", eliminarRoteiro);
 
 
 export default roteiroRoutes;

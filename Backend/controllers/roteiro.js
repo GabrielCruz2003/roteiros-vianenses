@@ -40,6 +40,19 @@ export const createRoteiro = async (req, res) => {
     return res.status(400).json({ message: "Falta preencher algo" });
   }
 
+  //verifica se o user existe
+  const userExists = await UserModel.findByPk(user_id);
+  if (!userExists) {
+    return res.status(400).json({ message: "Usuário não existe" });
+  }
+
+  // a data tem de ser maior que a data atual
+  const dataAtual = new Date();
+  if (data < dataAtual) {
+    return res.status(400).json({ message: "Data tem de ser maior que a data atual" });
+  }
+
+
   try {
     let nomeImagem = null;
 
@@ -116,6 +129,55 @@ export const getTypeRoteiro = async (req, res) => {
         return res.status(500).json({ message: "Erro ao buscar roteiro" });
     }
 };
+
+export const eliminarRoteiro = async (req, res) => {
+  const { user_id , roteiro_id } = req.body;
+
+  // Verifica se todos os campos estão preenchidos
+  if (!user_id || !roteiro_id) {
+    return res.status(400).json({ mensagem: "Falta preencher algo" });
+  }
+
+  //verifica se o user existe
+  const userExists = await UserModel.findByPk(user_id);
+  if (!userExists) {
+    return res.status(400).json({ mensagem: "Usuário não existe" });
+  }
+
+  // Verifica se o tipo de usuário é admin
+  const user = await UserModel.findByPk(user_id, {
+    include: {
+      model: UserTypeModel,
+      attributes: ['type'],
+    },
+  });
+
+  if (!user || user.user_type.type !== 'admin') {
+    return res.status(400).json({ mensagem: "Usuário não tem permissão para eliminar roteiros" });
+  }
+
+  // Verifica se o roteiro existe
+  const roteiro = await roteiroModel.findByPk(roteiro_id);
+  if (!roteiro) {
+    return res.status(400).json({ mensagem: "Roteiro não existe" });
+  }
+
+  try {
+    await roteiroModel.destroy({
+      where: {
+        id: roteiro_id,
+      },
+    });
+
+    return res.status(200).json({ mensagem: "Roteiro eliminado com sucesso" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao eliminar roteiro" });
+  }
+};
+
+
+  
 
 
 

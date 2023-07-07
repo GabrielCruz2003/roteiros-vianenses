@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { TokenService } from 'src/app/services/tokenService';
+import { HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-detalhes',
@@ -20,6 +22,7 @@ export class DetalhesPage implements OnInit {
   comentarios: any[] = [];
   comentarioForm!: FormGroup;
   roteiroTypes: any[] = [];
+  isAdmin = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +56,7 @@ export class DetalhesPage implements OnInit {
     }
 
     this.getComentarios(this.roteiro.id);
+    this.checkAdminStatus();
   }
 
   voltar() {
@@ -147,7 +151,7 @@ export class DetalhesPage implements OnInit {
     toast.present();
   }
 
-    async exibirToastErroInscricao(mensagem: string) {
+  async exibirToastErroInscricao(mensagem: string) {
       const toast = await this.toastController.create({
         message: mensagem,
         duration: 2000,
@@ -155,7 +159,7 @@ export class DetalhesPage implements OnInit {
         color: 'danger',
       });
       toast.present();
-    }
+  }
 
   adicionarLike() {
     const user_id = this.tokenService.getUserId();
@@ -207,4 +211,45 @@ export class DetalhesPage implements OnInit {
     }
   }
 
+  async checkAdminStatus() {
+    const userType = await this.tokenService.getUserType();
+    this.isAdmin = userType === 'admin';
+    console.log(this.isAdmin);
+  }
+
+  eliminarRoteiro() {
+    const user_id = this.tokenService.getUserId();
+    const roteiro_id = this.roteiro.id;
+
+    if (user_id) {
+      const requestOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.tokenService.getToken()}`
+        }),
+        body: {
+          user_id: user_id,
+          roteiro_id: roteiro_id
+        }
+      };
+
+      this.http.delete('http://localhost:5500/roteiro/deleteRoteiro', requestOptions)
+        .subscribe(
+          () => {
+            this.router.navigate(['/tabs/tab1']);
+            this.exibirToastSucesso('Roteiro eliminado com sucesso!');
+          },
+          (error) => {
+            console.error(error);
+            this.exibirToastErro(error.error.mensagem)
+            // Lidar com erros de exclusão
+          }
+        );
+    } else {
+      // Lógica para lidar com a ausência de user_id
+    }
+  }
+
+
 }
+
