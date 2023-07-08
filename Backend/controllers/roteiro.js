@@ -101,7 +101,6 @@ export const createRoteiro = async (req, res) => {
   }
 };
 
-
 export const getRoteiro = async (req, res) => {
     try {
         const roteiros = await roteiroModel.findAll({
@@ -120,7 +119,26 @@ export const getRoteiro = async (req, res) => {
     }
 };
 
-  
+export const getRoteiroById = async (req, res) => {
+  const roteiro_id = req.params.id;
+
+  try {
+    const roteiro = await roteiroModel.findByPk(roteiro_id, {
+      include: [
+        {
+          model: roteiroTypeModel,
+          as: "roteiro_type",	
+        },
+      ],
+    });
+
+    return res.status(200).json(roteiro);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Erro ao buscar roteiro" });
+  }
+};
+
 export const getTypeRoteiro = async (req, res) => {
     try {
         const roteiros = await roteiroTypeModel.findAll({ 
@@ -204,8 +222,79 @@ export const eliminarRoteiro = async (req, res) => {
   }
 };
 
+export const updateRoteiro = async (req, res) => {
+  const { nome, descricao, data, roteiro_type_id, user_id } = req.body;
+  const roteiro_id = req.params.id;
+  const imagem = req.file;
 
-  
+  try {
+    let nomeImagem = null;
+
+    // Verifica se o usuário existe
+    const userExists = await UserModel.findByPk(user_id);
+    if (!userExists) {
+      return res.status(400).json({ message: "Usuário não existe" });
+    }
+
+    // Verifica se a data é maior que a data atual
+    const dataAtual = new Date();
+    if (data < dataAtual) {
+      return res.status(400).json({ message: "Data deve ser maior que a data atual" });
+    }
+
+    // Verifica se o usuário é administrador
+    const user = await UserModel.findByPk(user_id, {
+      include: {
+        model: UserTypeModel,
+        attributes: ['type'],
+      },
+    });
+
+    if (!user || user.user_type.type !== 'admin') {
+      return res.status(400).json({ message: "Usuário não tem permissão para editar roteiros" });
+    }
+
+    // Verifica se o roteiro existe
+    const roteiro = await roteiroModel.findByPk(roteiro_id);
+    if (!roteiro) {
+      return res.status(400).json({ message: "Roteiro não existe" });
+    }
+
+    // Verifica se o tipo de roteiro existe
+    const roteiroType = await roteiroTypeModel.findByPk(roteiro_type_id);
+    if (roteiro_type_id && !roteiroType) {
+      return res.status(400).json({ message: "Tipo de roteiro não existe" });
+    }
+
+    // Se houver uma imagem, extrai o nome dela
+    if (imagem) {
+      const { filename } = imagem;
+      nomeImagem = filename;
+    }
+
+    // Atualiza apenas os campos fornecidos na solicitação
+    const updateData = {};
+    if (nome) updateData.nome = nome;
+    if (descricao) updateData.descricao = descricao;
+    if (data) updateData.data = data;
+    if (roteiro_type_id) updateData.roteiro_type_id = roteiro_type_id;
+    if (nomeImagem) updateData.imagem = nomeImagem;
+
+    // Atualiza o roteiro com os campos fornecidos
+    await roteiroModel.update(updateData, {
+      where: {
+        id: roteiro_id,
+      },
+    });
+
+    return res.status(200).json({ mensagem: "Roteiro atualizado com sucesso" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao atualizar roteiro" });
+  }
+};
+
+
 
 
 

@@ -20,4 +20,20 @@ export class RoteiroService {
     return this.http.get<any[]>(url);
   }
 
+  getRoteiroById(id: number): Observable<any> {
+    const url = `http://localhost:5500/roteiro/getRoteiroById/${id}`;
+    return this.http.get<any>(url);
+  }
+
+  updateRoteiro(id: number, roteiroAtualizado: any): Observable<any> {
+    const url = `http://localhost:5500/roteiro/updateRoteiro/${id}`;
+    return this.http.put<any>(url, roteiroAtualizado);
+  }
+
+  getRoteiroTypes(): Observable<any[]> {
+    const url = 'http://localhost:5500/roteiro/getRoteiroType';
+    return this.http.get<any[]>(url);
+  }
+
+
 }

@@ -289,6 +289,12 @@ export class DetalhesPage implements OnInit {
 
   }
 
+  redirectToEditRoteiro() {
+    const id = this.roteiro.id;
+
+    this.router.navigate([`/edit-roteiro/${id}`]);
+
+  }
 
 }
 

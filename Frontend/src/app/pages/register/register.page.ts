@@ -13,6 +13,7 @@ export class RegisterPage implements OnInit {
   name: string = '';
   email: string = '';
   password: string = '';
+  image: File | null = null; // Alteração: Definir o tipo como File ou null
 
   constructor(private http: HttpClient, private toastController: ToastController) { }
 
@@ -22,9 +23,9 @@ export class RegisterPage implements OnInit {
   async exibirToastSucesso(mensagem: string) {
     const toast = await this.toastController.create({
       message: "Usuário criado com sucesso!",
-      duration: 2000, // duração em milissegundos
-      position: 'bottom', // posição do toast
-      color: 'success' // cor do toast (opcional)
+      duration: 2000,
+      position: 'bottom',
+      color: 'success'
     });
     toast.present();
   }
@@ -32,36 +33,39 @@ export class RegisterPage implements OnInit {
   async exibirToastErro(mensagem: string) {
     const toast = await this.toastController.create({
       message: "Erro ao criar usuário!",
-      duration: 2000, // duração em milissegundos
-      position: 'bottom', // posição do toast
-      color: 'danger' // cor do toast (opcional)
+      duration: 2000,
+      position: 'bottom',
+      color: 'danger'
     });
     toast.present();
   }
 
-  createUser() {
-    const userData = {
-      name: this.name,
-      email: this.email,
-      password: this.password,
-    };
+  onImageChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.image = event.target.files[0];
+    }
+  }
 
-    this.http.post('http://localhost:5500/users/createUser', userData)
+  createUser() {
+    const formData = new FormData();
+    formData.append('name', this.name);
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+    if (this.image) {
+      formData.append('image', this.image);
+    }
+
+    this.http.post('http://localhost:5500/users/createUser', formData)
       .subscribe(
         response => {
           console.log(response);
-          // Tratar a resposta do servidor, redirecionar ou exibir uma mensagem de sucesso
-            window.location.href = '/login';
-            this.exibirToastSucesso('Usuário criado com sucesso!');
+          window.location.href = '/login';
+          this.exibirToastSucesso('Usuário criado com sucesso!');
         },
         error => {
           console.error(error);
-          // Tratar o erro, exibir uma mensagem de erro
-          this.exibirToastErro('Erro ao criar usuário!');
+          this.exibirToastErro(error.error.message);
         }
       );
   }
-
-
-
 }

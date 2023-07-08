@@ -27,9 +27,15 @@
           <input name="password" type="password"  [(ngModel)]="password">
         </div>
 
+
+        <div style="margin-top: 15px;">
+          <input name="image" type="file" class="foto" (change)="onImageChange($event)">
+        </div>
+
+
         <!-- link to go to the login page-->
         <div class="div-link">
-          <a href="/login" style="font-size: 12px; text-decoration: none">Já tem conta? Inicie Sessão</a>
+          <a href="/login" style="font-size: 12px; text-decoration: none; margin-top: 20px;">Já tem conta? Inicie Sessão</a>
         </div>
 
         <div class="div-btn">

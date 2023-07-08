@@ -6,6 +6,8 @@ import { getRoteiro } from "../controllers/roteiro.js";
 import { eliminarRoteiro } from "../controllers/roteiro.js";
 import { storage } from "../config/multerconfig.js";
 import { getTypeRoteiro } from "../controllers/roteiro.js";
+import { updateRoteiro } from "../controllers/roteiro.js";
+import { getRoteiroById } from "../controllers/roteiro.js";
 
 
 
@@ -19,9 +21,13 @@ roteiroRoutes.post("/createTypeRoteiro", createTypeRoteiro);
 
 roteiroRoutes.get("/getRoteiro", getRoteiro);
 
+roteiroRoutes.get("/getRoteiroById/:id", getRoteiroById);
+
 roteiroRoutes.get("/getRoteiroType", getTypeRoteiro)
 
 roteiroRoutes.delete("/deleteRoteiro", eliminarRoteiro);
+
+roteiroRoutes.put("/updateRoteiro/:id", upload.single("imagem"), updateRoteiro);
 
 
 export default roteiroRoutes;

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="voltar()">
+        voltar
+    </ion-buttons>
+    <ion-title>Editar Roteiro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content>
+    <form (ngSubmit)="updateRoteiro()">
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="stacked">Nome do Roteiro</ion-label>
+            <ion-input name="nomeRoteiro" [(ngModel)]="roteiro.nome" placeholder="Nome do Roteiro"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Descrição do Roteiro</ion-label><br>
+            <ion-input name="descricaoRoteiro" [(ngModel)]="roteiro.descricao" placeholder="Digite a descrição do roteiro"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Tipo de Roteiro</ion-label>
+            <ion-select name="tipoRoteiro" [(ngModel)]="roteiro.roteiro_type.id" placeholder="Selecione o tipo de roteiro">
+              <ion-select-option *ngFor="let tipo of tiposRoteiro" [value]="tipo.id">{{ tipo.type }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label position="stacked">Data do Roteiro</ion-label>
+            <ion-input type="date" name="dataRoteiro" [(ngModel)]="roteiro.data"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Selecionar Imagem</ion-label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+          </ion-item>
+
+          <ion-button expand="full" (click)="updateRoteiro()" style="margin-top: 40px;">Editar Roteiro</ion-button>
+
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </ion-content>
+
+
+
+

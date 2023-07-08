@@ -41,6 +41,11 @@ const routes: Routes = [
     path: 'roteiros-inscritos/:user_id',
     loadChildren: () => import('./pages/roteiros-inscritos/roteiros-inscritos.module').then( m => m.RoteirosInscritosPageModule)
   },
+  {
+    path: 'edit-roteiro/:id',
+    loadChildren: () => import('./pages/edit-roteiro/edit-roteiro.module').then( m => m.EditRoteiroPageModule)
+  },
+
 
 
 

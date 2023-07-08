@@ -23,6 +23,7 @@
       <h3 style="font-weight: bold; font-size: 16px;">Começa {{ roteiro.data }}</h3>
       <p style="margin-top: 10px;">{{ roteiro.descricao }}</p>
       <ion-button expand="block" color="" style="margin-top: 30px ; font-family: 'Poppins Medium';" (click)="inscrever()">INSCREVER</ion-button>
+      <ion-button *ngIf="isAdmin" (click)="redirectToEditRoteiro()" expand="block" color="secondary" style="margin-top: 5px ; font-family: 'Poppins Medium';">EDITAR ROTEIRO</ion-button>
       <ion-button *ngIf="isAdmin" (click)="eliminarRoteiro()" expand="block" color="danger" style="margin-top: 5px ; font-family: 'Poppins Medium';">APAGAR ROTEIRO</ion-button>
     </ion-card-content>
   </ion-card>

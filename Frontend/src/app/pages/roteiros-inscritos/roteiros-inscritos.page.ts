@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { IonicModule } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -37,6 +38,7 @@ export class RoteirosInscritosPage implements OnInit {
 
   ngOnInit(): void {
     this.getInscricaoByUser();
+
   }
 
   getInscricaoByUser(): void {
@@ -46,7 +48,13 @@ export class RoteirosInscritosPage implements OnInit {
         .get<Inscricao[]>('http://localhost:5500/inscricoes/getInscricaoByUser/' + userId)
         .subscribe(
           (response) => {
-            this.inscricoes = response;
+            this.inscricoes = response.map((inscricao) => ({
+              ...inscricao,
+              roteiro: {
+                ...inscricao.roteiro,
+                data: format(new Date(inscricao.roteiro.data), 'dd/MM/yy'),
+              },
+            }));
           },
           (error) => {
             console.error(error);
@@ -54,4 +62,6 @@ export class RoteirosInscritosPage implements OnInit {
         );
     }
   }
+
+
 }
