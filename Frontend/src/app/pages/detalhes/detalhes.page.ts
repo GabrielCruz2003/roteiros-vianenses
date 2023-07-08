@@ -24,6 +24,7 @@ export class DetalhesPage implements OnInit {
   roteiroTypes: any[] = [];
   isAdmin = false;
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -221,6 +222,7 @@ export class DetalhesPage implements OnInit {
     const user_id = this.tokenService.getUserId();
     const roteiro_id = this.roteiro.id;
 
+
     if (user_id) {
       const requestOptions = {
         headers: new HttpHeaders({
@@ -248,6 +250,43 @@ export class DetalhesPage implements OnInit {
     } else {
       // Lógica para lidar com a ausência de user_id
     }
+  }
+
+  eliminarComentario(){
+    const user_id = this.tokenService.getUserId();
+    const roteiro_id = this.roteiro.id;
+    const comentario_id = this.comentarios[0].id; // Acessa o id do primeiro comentário da lista
+
+    if (user_id) {
+      const requestOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.tokenService.getToken()}`
+        }),
+        body: {
+          user_id: user_id,
+          roteiro_id: roteiro_id,
+          comentario_id: comentario_id
+        }
+      };
+
+      this.http.delete('http://localhost:5500/comentario/deleteComentario', requestOptions)
+        .subscribe(
+          () => {
+            this.router.navigate(['/tabs/tab1']);
+            this.exibirToastSucesso('Comentário eliminado com sucesso!');
+          },
+          (error) => {
+            console.error(error);
+            this.exibirToastErro(error.error.mensagem)
+            // Lidar com erros de exclusão
+          }
+        );
+    } else {
+      // Lógica para lidar com a ausência de user_id
+    }
+
+
   }
 
 

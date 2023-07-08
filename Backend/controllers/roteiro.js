@@ -8,6 +8,7 @@ import UserModel from "../models/users.js";
 import UserTypeModel from "../models/user_type.js";
 import inscricoesModel from "../models/inscricoes.js";
 import likesModel from "../models/likes.js";
+import comentariosModel from "../models/comentarios.js";
 
 
 const upload = multer({ storage: storage });
@@ -187,6 +188,14 @@ export const eliminarRoteiro = async (req, res) => {
         roteiro_id: roteiro_id,
       },
     });
+
+    // Elimina os comentários associados ao roteiro
+    await comentariosModel.destroy({
+      where: {
+        roteiro_id: roteiro_id,
+      },
+    });
+
 
     return res.status(200).json({ mensagem: "Roteiro eliminado com sucesso" });
   } catch (error) {
