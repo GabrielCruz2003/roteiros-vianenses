@@ -116,7 +116,7 @@ export class DetalhesPage implements OnInit {
     const toast = await this.toastController.create({
       message: mensagem,
       duration: 2000, // duração em milissegundos
-      position: 'top', // posição do toast
+      position: 'bottom', // posição do toast
       color: 'success', // cor do toast (opcional)
     });
     toast.present();
@@ -126,7 +126,7 @@ export class DetalhesPage implements OnInit {
     const toast = await this.toastController.create({
       message: mensagem,
       duration: 2000, // duração em milissegundos
-      position: 'top', // posição do toast
+      position: 'bottom', // posição do toast
       color: 'danger', // cor do toast (opcional)
     });
     toast.present();

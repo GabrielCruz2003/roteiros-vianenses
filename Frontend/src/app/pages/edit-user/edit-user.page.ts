@@ -95,16 +95,38 @@ export class EditUserPage {
     this.http.put(`http://localhost:5500/users/updateUser/${user_id}`, formData).subscribe(
       (response) => {
         this.router.navigate(['/tabs/tab3']);
+        this.presentToastSucess('Usuário atualizado com sucesso!');
       },
       (error) => {
         console.error(error);
         console.log(formData);
+        this.presentToastError(error.error.message);
       }
     );
   }
 
   consoleLogUser() {
     console.log(this.user);
+  }
+
+  async presentToastSucess(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: 'success',
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  async presentToastError(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: 'danger',
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }
