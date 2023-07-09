@@ -17,7 +17,8 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
     HttpClientModule,
-    ToolbarModule
+    ToolbarModule,
+
   ],
   declarations: [Tab2Page]
 })

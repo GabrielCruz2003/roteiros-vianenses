@@ -10,24 +10,86 @@
     </ion-card-content>
   </ion-card>
 
-
-
-  <ion-title>Recentes:</ion-title>
-
-  <ion-card *ngFor="let roteiro of ultimosRoteiros">
+  <ion-card>
     <ion-card-header>
-      <img
-        *ngFor="let imagem of roteiro.imagem"
-        [src]="getImageUrl(imagem.nome)"
-        alt="Imagem do roteiro"
-      >
+      <ion-slides>
+        <ion-slide>
+          <img src="../../assets/images/fotos de viana/viana-do-castelo.jpg" alt="Imagem 1">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../assets/images/fotos de viana/miradouro-do-rio-viana-do-castelo.png" alt="Imagem 2">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../assets/images/fotos de viana/ddd-e1515772461150.jpg" alt="Imagem 3">
+        </ion-slide>
+      </ion-slides>
+    </ion-card-header>
+  </ion-card>
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Pontos Turísticos</ion-card-title>
+      <ion-card-subtitle>Viana do Castelo</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-card-title>{{ roteiro.nome }}</ion-card-title>
-      <ion-card-subtitle>{{ getRoteiroTypeName(roteiro.roteiro_type_id) }}</ion-card-subtitle>
-      {{ roteiro.descricao }}
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="../../assets/images/PontosTuristicos/santa-luzia-plus-small.jpg" />
+          </ion-thumbnail>
+          <ion-label>Santuário de Santa Luzia</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="../../assets/images/PontosTuristicos/Viana_do_Castelo_-_panoramio_(62).jpg" />
+          </ion-thumbnail>
+          <ion-label>O Navio Gil Eannes</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="../../assets/images/PontosTuristicos/capa_15964.jpg" />
+          </ion-thumbnail>
+          <ion-label>Praia do Cabedelo</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="../../assets/images/PontosTuristicos/museu-do-traje.jpg" />
+          </ion-thumbnail>
+          <ion-label>Museu do Traje</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="../../assets/images/PontosTuristicos/igreja-da-misericordia.jpg" />
+          </ion-thumbnail>
+          <ion-label>Igreja da Misericordia</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="../../assets/images/PontosTuristicos/praia-da-amorosa_02.png" />
+          </ion-thumbnail>
+          <ion-label>Praia da Amorosa</ion-label>
+        </ion-item>
+
+
+
+
+      </ion-list>
     </ion-card-content>
   </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+    <img src="../../assets/images/fotos de viana/mapa.png" alt="mapa de viana">
+    </ion-card-content>
+  </ion-card>
+
 
 </ion-content>
 

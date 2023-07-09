@@ -67,8 +67,6 @@ export const getLikesByUser = async (req, res) => {
     try {
         const { user_id } = req.params;
 
-
-
        //buscar todos os likes do usuario incluindo o roteiro
         const likes = await likesModel.findAll({
             where: {
@@ -87,3 +85,5 @@ export const getLikesByUser = async (req, res) => {
         res.status(500).json({ error: 'Erro ao obter likes' });
     }
 }
+
+

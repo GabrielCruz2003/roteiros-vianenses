@@ -7,6 +7,7 @@ import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -83,6 +84,7 @@ export class Tab2Page {
   irTempo() {
     this.route.navigate(['/tempo']);
   }
+
 }
 
 
