@@ -38,4 +38,10 @@ export class TokenService {
       return Promise.resolve(null);
     }
   }
+
+  updateUser() {
+    const user_id = this.getUserId();
+    return this.http.get(`http://localhost:5500/users/updateUser/` + user_id);
+  }
+  
 }

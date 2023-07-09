@@ -52,7 +52,7 @@ export class RoteirosInscritosPage implements OnInit {
               ...inscricao,
               roteiro: {
                 ...inscricao.roteiro,
-                data: format(new Date(inscricao.roteiro.data), 'dd/MM/yy'),
+                data: format(new Date(inscricao.roteiro.data), 'dd/MM/yyyy'),
               },
             }));
           },

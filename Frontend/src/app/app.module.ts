@@ -10,6 +10,8 @@ import { NavController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { RoteiroComponentsModule } from './components/roteiro-components/roteiro-components.module';
 import { ToolbarModule } from './components/toolbar/toolbar.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { ToolbarModule } from './components/toolbar/toolbar.module';
     FormsModule,
     RouterModule,
     HttpClientModule,
-    ToolbarModule
+    ToolbarModule,
+    RoteiroComponentsModule,
 
 
   ],

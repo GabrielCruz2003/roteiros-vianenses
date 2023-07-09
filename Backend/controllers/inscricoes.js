@@ -27,7 +27,12 @@ export const createInscricao = async (req, res) => {
         return res.status(400).json({mensagem: "Usuário já inscrito no roteiro!"});
     }
 
+    
+
     try {
+
+
+
         const data = await inscricoesModel.create(req.body);
         return res.status(201).json(data);
     } catch (error) {
@@ -59,6 +64,7 @@ export const getInscricao = async (req, res) => {
 
 export const getInscricaoByUser = async (req, res) => {
     const { user_id } = req.params;
+    
     try {
         const data = await inscricoesModel.findAll({
             where: {user_id: user_id},

@@ -85,7 +85,6 @@ export const getUsers = async (req, res) => {
   }
 };
 
-
 export const getUserById = async (req, res) => {
   const { id } = req.params;
 
@@ -103,8 +102,6 @@ export const getUserById = async (req, res) => {
     return res.status(500).json({ message: "Erro ao buscar usuário" });
   }
 };
-
-
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -136,3 +133,46 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: "Erro ao fazer login" });
   }
 };
+
+export const updateUser = async (req, res) => {
+  const { user_id } = req.params;
+  const { name, email, password } = req.body;
+  let image = req.file ? req.file.filename : undefined;
+
+  try {
+    const user = await UserModel.findByPk(user_id);
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (email) {
+      // Verifique se o email é válido
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Email inválido" });
+      }
+      updateData.email = email;
+    }
+    if (password) {
+      // Hash da nova senha
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      updateData.password = hashedPassword;
+    }
+    if (image) {
+      updateData.image = image;
+    }
+
+    await user.update(updateData);
+
+    return res.status(200).json({ message: "Usuário atualizado com sucesso" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Erro ao atualizar usuário" });
+  }
+};
+
+

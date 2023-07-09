@@ -66,4 +66,11 @@ export class Tab3Page {
       window.location.href = `/roteiros-inscritos/${userId}`;
     }
   }
+
+  irEditarPerfil() {
+    const userId = this.tokenService.getUserId();
+    if (userId) {
+      window.location.href = `/edit-user/${userId}`;
+    }
+  }
 }

@@ -45,6 +45,11 @@ const routes: Routes = [
     path: 'edit-roteiro/:id',
     loadChildren: () => import('./pages/edit-roteiro/edit-roteiro.module').then( m => m.EditRoteiroPageModule)
   },
+  {
+    path: 'edit-user/:user_id',
+    loadChildren: () => import('./pages/edit-user/edit-user.module').then( m => m.EditUserPageModule)
+  },
+
 
 
 
