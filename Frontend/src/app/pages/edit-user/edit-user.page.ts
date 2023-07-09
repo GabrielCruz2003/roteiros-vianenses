@@ -68,9 +68,9 @@ export class EditUserPage {
           }
         }
       }
-
     );
   }
+
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -90,6 +90,11 @@ export class EditUserPage {
     }
     if (this.user.image) {
       formData.append('image', this.user.image);
+    }
+
+    //se nao mandar password, nao muda de password
+    if (this.userForm.value.password === '') {
+      formData.delete('password');
     }
 
     this.http.put(`http://localhost:5500/users/updateUser/${user_id}`, formData).subscribe(

@@ -17,7 +17,7 @@ const roteiroModel = db.define('roteiro', {
         allowNull: false
     },
     descricao: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: false
     },
     data: {
