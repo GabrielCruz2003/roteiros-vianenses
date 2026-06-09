@@ -4,18 +4,10 @@ import morgan from "morgan";
 import { config } from "dotenv";
 import db from "./config/db.js";
 import router from "./routes/index.js";
-import roteiroModel from "./models/roteiro.js";
-import multer from "multer";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-import path from "path";
-import { storage } from "./config/multerconfig.js";
-import inscricoesModel from "./models/inscricoes.js";
 
 config();
 
 const app = express();
-const clientURL = "*";
 
 const corsOptions = {
   origin: "*",
@@ -23,23 +15,15 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Middleware para exibir logs das solicitações
 app.use(morgan("combined"));
-
 app.use(cors(corsOptions));
- app.options('*', cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configuração do diretório de uploads
-app.use('/uploads', express.static(join(__dirname, './uploads')));
-
 app.use(router);
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
     console.log(
       "Server up and running at http://%s:%s",
@@ -49,9 +33,9 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-export default app;
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(err.status || 500).json({ message: err.message || 'Erro interno no servidor' });
+  res.status(err.status || 500).json({ message: err.message || "Erro interno no servidor" });
 });
+
+export default app;
