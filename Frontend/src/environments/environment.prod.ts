@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://<url-do-teu-backend>.vercel.app'
+  apiUrl: 'https://demo-gcruz-backend-roteiros-vianenses.vercel.app'
 };
