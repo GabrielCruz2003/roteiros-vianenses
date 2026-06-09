@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../services/tokenService';
+import { environment } from 'src/environments/environment';
 
 interface User {
   id: number;
@@ -44,7 +45,7 @@ export class Tab3Page {
   }
 
   getUserDetails(userId: number) {
-    const url = `http://localhost:5500/users/getUserById/${userId}`;
+    const url = `${environment.apiUrl}/users/getUserById/${userId}`;
     return this.http.get<User>(url);
   }
 

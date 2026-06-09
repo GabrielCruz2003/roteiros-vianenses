@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from 'src/app/services/tokenService';
+import { environment } from 'src/environments/environment';
 
 interface Inscricao {
   id: number;
@@ -45,7 +46,7 @@ export class RoteirosInscritosPage implements OnInit {
     const userId = this.tokenService.getUserId();
     if (userId) {
       this.http
-        .get<Inscricao[]>('http://localhost:5500/inscricoes/getInscricaoByUser/' + userId)
+        .get<Inscricao[]>(`${environment.apiUrl}/inscricoes/getInscricaoByUser/` + userId)
         .subscribe(
           (response) => {
             this.inscricoes = response.map((inscricao) => ({

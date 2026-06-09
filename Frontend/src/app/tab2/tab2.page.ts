@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { RoteiroService } from '../services/roteiro-service';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -61,7 +62,7 @@ export class Tab2Page {
 
   getRoteiroTypes(): void {
     this.http
-      .get<any>('http://localhost:5500/roteiro/getRoteiroType')
+      .get<any>(`${environment.apiUrl}/roteiro/getRoteiroType`)
       .subscribe(
         (response) => {
           this.roteiroTypes = response;
@@ -78,7 +79,7 @@ export class Tab2Page {
   }
 
   getImageUrl(nome: string): string {
-    return `http://localhost:5500/uploads/${nome}`;
+    return `${environment.apiUrl}/uploads/${nome}`;
   }
 
   irTempo() {

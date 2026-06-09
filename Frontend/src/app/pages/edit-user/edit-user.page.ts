@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class EditUserPage {
 
   getUserDetails() {
     const id = this.tokenService.getUserId();
-    this.http.get(`http://localhost:5500/users/getUserById/` + id).pipe(
+    this.http.get(`${environment.apiUrl}/users/getUserById/` + id).pipe(
       catchError((error) => {
         console.error(error);
         return throwError("Erro ao obter os dados do usuário.");
@@ -97,7 +98,7 @@ export class EditUserPage {
       formData.delete('password');
     }
 
-    this.http.put(`http://localhost:5500/users/updateUser/${user_id}`, formData).subscribe(
+    this.http.put(`${environment.apiUrl}/users/updateUser/${user_id}`, formData).subscribe(
       (response) => {
         this.router.navigate(['/tabs/tab3']);
         this.presentToastSucess('Usuário atualizado com sucesso!');

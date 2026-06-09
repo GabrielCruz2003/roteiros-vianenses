@@ -6,6 +6,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { format } from 'date-fns';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { type } from 'os';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -32,7 +33,7 @@ export class RoteiroComponentsComponent implements OnInit {
 
   getRoteiros(): void {
     this.http
-      .get<any>('http://localhost:5500/roteiro/getRoteiro')
+      .get<any>(`${environment.apiUrl}/roteiro/getRoteiro`)
       .subscribe(
         (response) => {
           this.roteiros = response;
@@ -45,7 +46,7 @@ export class RoteiroComponentsComponent implements OnInit {
 
   getRoteiroTypes(): void {
     this.http
-      .get<any>('http://localhost:5500/roteiro/getRoteiroType')
+      .get<any>(`${environment.apiUrl}/roteiro/getRoteiroType`)
       .subscribe(
         (response) => {
           this.roteiroTypes = response;
@@ -57,7 +58,7 @@ export class RoteiroComponentsComponent implements OnInit {
   }
 
   getImageUrl(nome: string): string {
-    return `http://localhost:5500/uploads/${nome}`;
+    return `${environment.apiUrl}/uploads/${nome}`;
   }
 
   getRoteiroTypeName(roteiroTypeId: number): string {
@@ -88,7 +89,7 @@ export class RoteiroComponentsComponent implements OnInit {
 
   getComentariosByRoteiro(roteiroId: number): void {
     this.http
-      .get<any>(`http://localhost:5500/comentario/comentarios/${roteiroId}`)
+      .get<any>(`${environment.apiUrl}/comentario/comentarios/${roteiroId}`)
       .subscribe(
         (response) => {
           this.comentarios = response;
@@ -102,7 +103,7 @@ export class RoteiroComponentsComponent implements OnInit {
 
   criarComentario(roteiroId: number, comentario: string, userId: number): void {
     this.http
-      .post<any>(`http://localhost:5500/comentario/createComentario`, {
+      .post<any>(`${environment.apiUrl}/comentario/createComentario`, {
         roteiroId: roteiroId,
         comentario: comentario,
         userId: userId,

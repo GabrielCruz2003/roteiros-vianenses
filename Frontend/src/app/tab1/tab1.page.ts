@@ -2,6 +2,7 @@ import { TokenService } from 'src/app/services/tokenService';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -37,7 +38,7 @@ export class Tab1Page implements OnInit {
 
   getRoteiros(): void {
     this.http
-      .get<any>('http://localhost:5500/roteiro/getRoteiro')
+      .get<any>(`${environment.apiUrl}/roteiro/getRoteiro`)
       .subscribe(
         (response) => {
           this.roteiros = response;
@@ -50,7 +51,7 @@ export class Tab1Page implements OnInit {
 
   getRoteiroTypes(): void {
     this.http
-      .get<RoteiroType[]>('http://localhost:5500/roteiro/getRoteiroType')
+      .get<RoteiroType[]>(`${environment.apiUrl}/roteiro/getRoteiroType`)
       .subscribe(
         (response) => {
           this.roteiroTypes = response;

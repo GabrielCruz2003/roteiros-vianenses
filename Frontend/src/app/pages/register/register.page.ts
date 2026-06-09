@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -55,7 +56,7 @@ export class RegisterPage implements OnInit {
       formData.append('image', this.image);
     }
 
-    this.http.post('http://localhost:5500/users/createUser', formData)
+    this.http.post(`${environment.apiUrl}/users/createUser`, formData)
       .subscribe(
         response => {
           console.log(response);

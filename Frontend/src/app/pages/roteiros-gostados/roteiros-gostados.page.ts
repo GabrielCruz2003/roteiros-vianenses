@@ -1,6 +1,7 @@
 import { TokenService } from './../../services/tokenService';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 interface Like {
   id: number;
@@ -38,7 +39,7 @@ export class RoteirosGostadosPage implements OnInit {
     const userId = this.tokenService.getUserId();
     if (userId) {
       this.http
-        .get<Like[]>('http://localhost:5500/like/getLikesByUser/' + userId)
+        .get<Like[]>(`${environment.apiUrl}/like/getLikesByUser/` + userId)
         .subscribe(
           (response) => {
             this.likes = response;

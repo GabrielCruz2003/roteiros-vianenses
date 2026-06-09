@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class TokenService {
     const userId = this.getUserId();
     if (userId) {
       return this.http
-        .get<any>('http://localhost:5500/users/getUsers')
+        .get<any>(`${environment.apiUrl}/users/getUsers`)
         .toPromise()
         .then((users: any[]) => {
           const user = users.find(u => u.id === userId);
@@ -41,7 +42,7 @@ export class TokenService {
 
   updateUser() {
     const user_id = this.getUserId();
-    return this.http.get(`http://localhost:5500/users/updateUser/` + user_id);
+    return this.http.get(`${environment.apiUrl}/users/updateUser/` + user_id);
   }
   
 }

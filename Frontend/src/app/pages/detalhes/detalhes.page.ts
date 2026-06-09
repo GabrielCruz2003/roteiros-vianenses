@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { TokenService } from 'src/app/services/tokenService';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class DetalhesPage implements OnInit {
     const user_id = this.tokenService.getUserId();
     if (user_id) {
       this.http
-        .get<boolean>(`http://localhost:5500/like/getLikes/${user_id}/${this.roteiro.id}`)
+        .get<boolean>(`${environment.apiUrl}/like/getLikes/${user_id}/${this.roteiro.id}`)
         .subscribe(
           (response) => {
             this.roteiro.userLiked = response;
@@ -66,7 +67,7 @@ export class DetalhesPage implements OnInit {
 
   getComentarios(roteiroId: number) {
     this.http
-      .get<any[]>(`http://localhost:5500/comentario/comentarios/${roteiroId}`)
+      .get<any[]>(`${environment.apiUrl}/comentario/comentarios/${roteiroId}`)
       .subscribe(
         (response) => {
           this.comentarios = response;
@@ -91,7 +92,7 @@ export class DetalhesPage implements OnInit {
 
     if (user_id) {
       this.http
-        .post<any>(`http://localhost:5500/comentario/createComentario`, {
+        .post<any>(`${environment.apiUrl}/comentario/createComentario`, {
           user_id: user_id,
           roteiro_id: roteiroId,
           comentario: comentario,
@@ -168,7 +169,7 @@ export class DetalhesPage implements OnInit {
 
     if (user_id) {
       this.http
-        .post<any>(`http://localhost:5500/like/addLike`, {
+        .post<any>(`${environment.apiUrl}/like/addLike`, {
           user_id: user_id,
           roteiro_id: roteiro_id,
         })
@@ -195,7 +196,7 @@ export class DetalhesPage implements OnInit {
     if (user_id) {
       const roteiro_id = this.roteiro.id;
       this.http
-        .post<any>(`http://localhost:5500/inscricoes/createInscricao`, {
+        .post<any>(`${environment.apiUrl}/inscricoes/createInscricao`, {
           roteiro_id: roteiro_id,
           user_id: user_id,
         })
@@ -235,7 +236,7 @@ export class DetalhesPage implements OnInit {
         }
       };
 
-      this.http.delete('http://localhost:5500/roteiro/deleteRoteiro', requestOptions)
+      this.http.delete(`${environment.apiUrl}/roteiro/deleteRoteiro`, requestOptions)
         .subscribe(
           () => {
             this.router.navigate(['/tabs/tab1']);
@@ -270,7 +271,7 @@ export class DetalhesPage implements OnInit {
         }
       };
 
-      this.http.delete('http://localhost:5500/comentario/deleteComentario', requestOptions)
+      this.http.delete(`${environment.apiUrl}/comentario/deleteComentario`, requestOptions)
         .subscribe(
           () => {
             this.router.navigate(['/tabs/tab1']);

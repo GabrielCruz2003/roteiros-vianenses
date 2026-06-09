@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 interface LoginResponse {
   message: string;
@@ -17,7 +18,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<LoginResponse> {
     const data = { email, password };
-    return this.http.post<LoginResponse>('http://localhost:5500/users/login', data)
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/users/login`, data)
       .pipe(
         map(response => {
           const token = response.token;

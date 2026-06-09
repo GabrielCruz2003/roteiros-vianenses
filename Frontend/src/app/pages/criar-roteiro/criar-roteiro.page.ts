@@ -3,6 +3,7 @@ import { TokenService } from 'src/app/services/tokenService';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 interface TipoRoteiro {
@@ -48,7 +49,7 @@ export class CriarRoteiroPage implements OnInit {
 
   getTiposRoteiro() {
     this.http
-      .get<TipoRoteiro[]>('http://localhost:5500/roteiro/getRoteiroType')
+      .get<TipoRoteiro[]>(`${environment.apiUrl}/roteiro/getRoteiroType`)
       .subscribe(
         (response) => {
           this.tiposRoteiro = response;
@@ -85,7 +86,7 @@ export class CriarRoteiroPage implements OnInit {
     formData.append('imagem', this.imagem);
 
     this.http
-      .post<Roteiro>('http://localhost:5500/roteiro/createRoteiro', formData)
+      .post<Roteiro>(`${environment.apiUrl}/roteiro/createRoteiro`, formData)
       .subscribe(
         (response) => {
           console.log('Roteiro criado com sucesso:', response);
