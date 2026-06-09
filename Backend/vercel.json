@@ -3,7 +3,40 @@
   "builds": [
     {
       "src": "index.js",
-      "use": "@vercel/node",
+# Vercel Runtime Log
+
+## Request
+ID: 4mbrc-1781006990908-6ea076288c7b
+Time: 2026-06-09T12:09:50.908Z
+POST /users/createUser → 500
+Host: demo-gcruz-backend-roteiros-vianenses.vercel.app
+Error: FUNCTION_INVOCATION_FAILED
+Duration: 695ms
+Cache: MISS
+Region: cdg1
+User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1
+Referer: https://demo-gcruz-roteiros-vianenses.vercel.app/
+
+## Lifecycle
+
+### Function
+Status: 500
+Route: /index.js
+Duration: 577ms
+Runtime: nodejs24.x
+Memory: -1MB / 2048MB
+Region: iad1
+
+### Cache
+Status: 500
+Route: /index.js
+Cache: MISS
+Region: cdg1
+
+## Deployment
+ID: dpl_6vKiTXuZpfKDf7WPUxovKSkneRGs
+Environment: production
+Branch: main      "use": "@vercel/node",
       "config": {
         "includeFiles": ["node_modules/**"]
       }
