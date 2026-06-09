@@ -36,11 +36,6 @@ app.use('/uploads', express.static(join(__dirname, './uploads')));
 
 app.use(router);
 
-(async () => {
-  await db.authenticate();
-  await db.sync({ force: false, alter: true });
-})();
-
 if (process.env.NODE_ENV !== 'production') {
   app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
     console.log(
