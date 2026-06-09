@@ -41,13 +41,17 @@ app.use(router);
   await db.sync({ force: false, alter: true });
 })();
 
-app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
-  console.log(
-    "Server up and running at http://%s:%s",
-    process.env.SERVER_HOST,
-    process.env.SERVER_PORT
-  );
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
+    console.log(
+      "Server up and running at http://%s:%s",
+      process.env.SERVER_HOST,
+      process.env.SERVER_PORT
+    );
+  });
+}
+
+export default app;
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
