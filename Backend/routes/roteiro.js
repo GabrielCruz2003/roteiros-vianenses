@@ -11,7 +11,7 @@ import { getRoteiroById } from "../controllers/roteiro.js";
 
 
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: multer.memoryStorage() });
 
 const roteiroRoutes = Router();
 

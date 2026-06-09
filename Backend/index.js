@@ -18,7 +18,9 @@ const app = express();
 const clientURL = "*";
 
 const corsOptions = {
-  origin: clientURL,
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,6 +30,7 @@ const __dirname = dirname(__filename);
 app.use(morgan("combined"));
 
 app.use(cors(corsOptions));
+ app.options('*', cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
